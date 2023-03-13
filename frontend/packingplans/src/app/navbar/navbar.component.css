@@ -1,0 +1,25 @@
+.toolbar {
+  background-color: #222136;
+}
+.spacer {
+  flex: 1 1 auto;
+  width: 10%;
+}
+
+.icon-display {
+  transform: scale(1.5);
+}
+
+.logoName {
+  color: white;
+  margin-right: 2%;
+}
+
+.mat-button{
+  color: white !important;
+
+}
+
+.mat-button:hover {
+  transform: scale(1.25) perspective(1px);
+}
