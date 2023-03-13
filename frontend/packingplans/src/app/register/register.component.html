@@ -1,0 +1,42 @@
+<div class="title-container">
+<h1 align="center" class="title display-1"><strong>Register</strong></h1>
+</div>
+<form [formGroup]="loginForm" class="login-form">
+  <div class="container">
+  <div class="row">
+  <div class="col">
+  <mat-form-field class="form-field" appearance="outline">
+    <input matInput formControlName="fullname" placeholder="Full Name">
+    <mat-error *ngIf="loginForm.controls.fullname.errors?.['required']">Full Name is required</mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <input matInput formControlName="username" placeholder="Username">
+    <mat-error *ngIf="loginForm.controls.username.errors?.['required']">Username is required</mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <input matInput formControlName="email" placeholder="Email">
+    <mat-error *ngIf="loginForm.controls.email.errors?.['required']">Email is required</mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <input matInput formControlName="password" placeholder="Password" type="password">
+    <mat-error *ngIf="loginForm.controls.password.errors?.['required']">Password is required</mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <input matInput formControlName="confirmpassword" placeholder="Confirm Password" type="password">
+    <mat-error *ngIf="loginForm.controls.password.errors?.['required']">Password is required</mat-error>
+  </mat-form-field>
+  </div>
+  <div class="col">
+    <img src="../../assets/images/register_photo.png" class="register-image">
+  </div>
+  </div>
+    <div class="row">
+      <div class="col log-in-ref">
+        Already have an account? Log in <u><a href="www.google.com">here</a></u>
+      </div>
+      <div class="col">
+  <button mat-raised-button [disabled]="loginForm.invalid" class="rounded-4 register-button">Register Now!</button>
+  </div>
+    </div>
+  </div>
+</form>
