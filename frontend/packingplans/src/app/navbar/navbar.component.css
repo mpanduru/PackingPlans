@@ -1,6 +1,7 @@
 .toolbar {
   background-color: #222136;
 }
+
 .spacer {
   flex: 1 1 auto;
   width: 10%;
@@ -13,13 +14,15 @@
 .logoName {
   color: white;
   margin-right: 2%;
+  font-size: 1.1em;
 }
 
-.mat-button{
+.mat-button {
   color: white !important;
-
+  font-size: 0.8em;
 }
 
 .mat-button:hover {
   transform: scale(1.25) perspective(1px);
+  text-shadow: 0px 0px 5px #80d4ff;
 }
