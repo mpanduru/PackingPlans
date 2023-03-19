@@ -1,0 +1,67 @@
+.slide {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.container {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  color: white;
+  text-shadow: 3px 3px 3px black;
+  font-size: 3.5em;
+  font-weight: bold;
+  margin-top: 3%;
+}
+
+.rightArrow {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 32px;
+  font-size: 45px;
+  color: #fff;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.leftArrow {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: 32px;
+  font-size: 45px;
+  color: #fff;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.slider {
+  position: relative;
+  height: 100%;
+}
+
+.my-custom-button {
+  width: 110%;
+  height: 170%;
+  background-color: grey;
+  color: white;
+  font-size: 0.5em;
+}
+
+.my-custom-button:hover {
+  background-color: #222136;
+}
+
