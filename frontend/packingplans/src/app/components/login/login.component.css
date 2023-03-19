@@ -1,0 +1,69 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.whitespace {
+  margin-top: 10%;
+}
+
+.form-field {
+  width: 80% !important;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 20px;
+}
+
+.register-image {
+  background-image: url("../../../assets/images/loginphoto.png");
+  background-size: cover;
+}
+
+.column {
+  float: left;
+}
+
+.title-container {
+  height: 5%;
+  margin-top: 11%;
+}
+
+.title {
+  margin-top: 3%;
+  font-size: xx-large;
+}
+
+.register-button {
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 10%;
+  font-size: x-large;
+}
+
+.log-in-ref {
+  margin-left: 15%;
+  margin-top: 9%;
+  font-size: large;
+}
+
+.container {
+  overflow: hidden !important;
+  padding: 0 !important;
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  height: 100%;
+}
+
+/*.set-margin-top {*/
+/*  margin-top: 2%;*/
+/*}*/
+
+.button-color {
+  background-color: #8c8bcb;
+  color: #ffffff;
+}
