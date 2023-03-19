@@ -1,0 +1,48 @@
+<div class="title-container">
+  <h1 align="center" class="title display-1"><strong>Register</strong></h1>
+</div>
+<form [formGroup]="loginForm" class="login-form">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" class="form-field">
+          <input formControlName="fullname" matInput placeholder="Full Name">
+          <mat-error *ngIf="loginForm.controls.fullname.errors?.['required']">Full Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input formControlName="username" matInput placeholder="Username">
+          <mat-error *ngIf="loginForm.controls.username.errors?.['required']">Username is required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input formControlName="email" matInput placeholder="Email">
+          <mat-error *ngIf="loginForm.controls.email.errors?.['required']">Email is required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input formControlName="password" matInput placeholder="Password" type="password">
+          <mat-error *ngIf="loginForm.controls.password.errors?.['required']">Password is required</mat-error>
+          <mat-error *ngIf="loginForm.controls.password.errors?.['pattern']">Password must have at least 8 characters,
+            one uppercase letter, one lowercase letter and a symbol
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input formControlName="confirmpassword" matInput placeholder="Confirm Password" type="password">
+          <mat-error *ngIf="loginForm.controls.confirmpassword.errors?.['required']">Password is required</mat-error>
+          <mat-error *ngIf="loginForm.controls.confirmpassword.errors?.['passwordValidator']">Passwords must match
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <img class="register-image" src="../../../assets/images/register_photo.png">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col log-in-ref">
+        Already have an account? Log in <u><a href="www.google.com">here</a></u>
+      </div>
+      <div class="col">
+        <button [disabled]="loginForm.invalid" class="rounded-4 register-button" mat-raised-button>Register Now!
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
