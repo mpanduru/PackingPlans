@@ -1,4 +1,5 @@
 <div class="slider">
+  <!--  to do add fade between slides [ngClass]="{'fade-in': currentIndex % 2 == 1, 'fade-out': currentIndex % 2 == 0}"-->
   <div>
     <div (click)="goToPrevious()" class="leftArrow">❰</div>
     <div (click)="goToNext()" class="rightArrow">❱</div>
@@ -9,7 +10,7 @@
   >
     <div class="container">
       <div class="text">
-        Ready for your next adventure?
+        Can not wait for your next trip?
       </div>
       <div class="text">
         <button class="rounded-4 my-custom-button" mat-raised-button>Start planing now

@@ -6,6 +6,32 @@
   position: relative;
 }
 
+.fade-in {
+  animation: fade-in 5s;
+}
+
+.fade-out {
+  animation: fade-out 5s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
 .container {
   position: absolute;
   top: 20%;
@@ -64,4 +90,3 @@
 .my-custom-button:hover {
   background-color: #222136;
 }
-
