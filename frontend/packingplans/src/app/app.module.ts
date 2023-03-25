@@ -7,7 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {RegisterButtonComponent, RegisterComponent} from './components/register/register.component';
+import {RegisterComponent} from './components/register/register.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {NavbarComponent} from './components/navbar/navbar.component';
@@ -21,7 +21,6 @@ import {HttpClientModule} from '@angular/common/http'
   declarations: [
     AppComponent,
     RegisterComponent,
-    RegisterButtonComponent,
     NavbarComponent,
     LoginComponent,
     HomepageComponent,
