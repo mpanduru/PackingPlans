@@ -40,8 +40,10 @@
           Already have an account? Log in <u><a (click)="moveToLogin()" class="fake-href">here</a></u>
         </div>
       </div>
-      <div class="col register-image">
-        <!--        <img class="register-image" src="../../../assets/images/register_photo.png">-->
+      <div class="col register-image d-flex flex-column align-items-center justify-content-end">
+        <div *ngIf="isSignUpFailed" class="alert alert-info">
+          Registration failed!<br/>{{ errorMessage }}
+        </div>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
 import {DialogService} from "../dialogService/dialog.service";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../services/authService/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -10,6 +10,8 @@ import {AuthService} from "../../services/auth.service";
 })
 
 export class RegisterComponent {
+  errorMessage = '';
+  isSignUpFailed = false;
   registerForm = this.formBuilder.group({
     fullname: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -32,10 +34,12 @@ export class RegisterComponent {
       this.registerForm.controls.email.value || "",
       this.registerForm.controls.password.value || "").subscribe({
       next: data => {
-        console.log(data);
+        this.isSignUpFailed = false;
+        this.dialogService.closeRegisterDialog();
       },
       error: err => {
-        console.log(err);
+        this.isSignUpFailed = true;
+        this.errorMessage = err.error.message;
       }
     });
   }
