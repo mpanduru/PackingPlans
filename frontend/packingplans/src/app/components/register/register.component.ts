@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
-import {MatDialog} from '@angular/material/dialog';
+import {DialogService} from "../dialogService/dialog.service";
 
 @Component({
   selector: 'app-register',
@@ -17,7 +17,12 @@ export class RegisterComponent {
     confirmpassword: ['', [Validators.required, this.passwordValidator]]
   });
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private dialogService: DialogService) {
+  }
+
+  moveToLogin() {
+    this.dialogService.closeRegisterDialog();
+    this.dialogService.openLoginDialog();
   }
 
   private passwordValidator(control: AbstractControl) {
@@ -27,23 +32,4 @@ export class RegisterComponent {
     }
     return null;
   }
-}
-
-@Component({
-  selector: 'app-register-button',
-  template: ''
-})
-export class RegisterButtonComponent {
-
-  constructor(private dialog: MatDialog) {
-    this.openRegisterDialog();
-  }
-
-  openRegisterDialog(): void {
-    this.dialog.open(RegisterComponent, {
-      width: '50%',
-      height: '70%'
-    });
-  }
-
 }

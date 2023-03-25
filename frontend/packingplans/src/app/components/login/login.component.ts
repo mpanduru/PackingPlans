@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
+import {DialogService} from "../dialogService/dialog.service";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,12 @@ export class LoginComponent {
     password: ['', [Validators.required]]
   });
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private dialogService: DialogService) {
+  }
+
+  moveToRegister() {
+    this.dialogService.closeLoginDialog();
+    this.dialogService.openRegisterDialog();
   }
 
   private passwordValidator(control: AbstractControl) {
@@ -24,23 +29,4 @@ export class LoginComponent {
     }
     return null;
   }
-}
-
-@Component({
-  selector: 'app-login-button',
-  template: ''
-})
-export class LoginButtonComponent {
-
-  constructor(private dialog: MatDialog) {
-    this.openLoginDialog();
-  }
-
-  openLoginDialog(): void {
-    this.dialog.open(LoginComponent, {
-      width: '50%',
-      height: '55%'
-    });
-  }
-
 }

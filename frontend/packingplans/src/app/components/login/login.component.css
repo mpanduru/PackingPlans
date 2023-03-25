@@ -59,11 +59,13 @@
   height: 100%;
 }
 
-/*.set-margin-top {*/
-/*  margin-top: 2%;*/
-/*}*/
-
 .button-color {
   background-color: #8c8bcb;
   color: #ffffff;
+}
+
+.fake-href {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
 }
