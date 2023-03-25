@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
 import {MatDialog} from '@angular/material/dialog';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 })
 
 export class RegisterComponent {
-  loginForm = this.formBuilder.group({
+  registerForm = this.formBuilder.group({
     fullname: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     username: ['', Validators.required],
@@ -17,7 +18,21 @@ export class RegisterComponent {
     confirmpassword: ['', [Validators.required, this.passwordValidator]]
   });
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  }
+
+  onSubmit(): void {
+    this.authService.register(this.registerForm.controls.fullname.value || "",
+      this.registerForm.controls.username.value || "",
+      this.registerForm.controls.email.value || "",
+      this.registerForm.controls.password.value || "").subscribe({
+      next: data => {
+        console.log(data);
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   private passwordValidator(control: AbstractControl) {
