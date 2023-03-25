@@ -1,0 +1,28 @@
+<form [formGroup]="loginForm" class="login-form" style="width: 100%; height: 100%">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="title-container">
+          <h1 align="center" class="title display-1"><strong>Log in</strong></h1>
+        </div>
+        <div class="whitespace"></div>
+        <mat-form-field class="form-field">
+          <input formControlName="username" matInput placeholder="Username">
+          <mat-error *ngIf="loginForm.controls.username.errors?.['required']">Username is required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input formControlName="password" matInput placeholder="Password" type="password">
+          <mat-error *ngIf="loginForm.controls.password.errors?.['required']">Password is required</mat-error>
+        </mat-form-field>
+        <button [disabled]="loginForm.invalid" class="rounded-4 register-button button-color" mat-raised-button>Log in
+          Now!
+        </button>
+        <div class="log-in-ref">
+          Do not have an account? Register <u><a href="http://localhost:4200/register">here</a></u>
+        </div>
+      </div>
+      <div class="col login-image">
+      </div>
+    </div>
+  </div>
+</form>

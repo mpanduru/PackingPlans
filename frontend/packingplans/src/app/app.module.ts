@@ -12,13 +12,15 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {LoginComponent} from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     RegisterButtonComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
