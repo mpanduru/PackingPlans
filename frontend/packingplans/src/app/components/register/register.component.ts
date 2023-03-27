@@ -14,9 +14,9 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
   isSignUpFailed = false;
   registerForm = this.formBuilder.group({
-    fullname: ['', Validators.required],
+    fullname: ['', [Validators.required, Validators.pattern(/^.{3,}$/)]],
     email: ['', [Validators.required, Validators.email]],
-    username: ['', Validators.required],
+    username: ['', [Validators.required, Validators.pattern(/^.{3,}$/)]],
     password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&^_-]).{8,}$/)]],
     confirmpassword: ['', [Validators.required, this.passwordValidator]]
   });

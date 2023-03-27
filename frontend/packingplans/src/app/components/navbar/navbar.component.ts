@@ -30,17 +30,6 @@ export class NavbarComponent implements OnInit {
     this.dialogService.openLoginDialog();
   }
 
-  tryUser(): void {
-    this.userService.getUserBoard().subscribe({
-      next: res => {
-        console.log(res);
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
-  }
-
   logout(): void {
     this.authService.logout().subscribe({
       next: res => {

@@ -8,10 +8,14 @@
         <mat-form-field appearance="outline" class="form-field">
           <input formControlName="fullname" matInput placeholder="Full Name">
           <mat-error *ngIf="registerForm.controls.fullname.errors?.['required']">Full Name is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.fullname.errors?.['pattern']">Full Name's minimum length is 3
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
           <input formControlName="username" matInput placeholder="Username">
           <mat-error *ngIf="registerForm.controls.username.errors?.['required']">Username is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.username.errors?.['pattern']">Username's minimum length is 3
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
           <input formControlName="email" matInput placeholder="Email">
