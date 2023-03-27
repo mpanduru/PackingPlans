@@ -3,8 +3,8 @@
     <img alt="Packing plans Logo" height="100%" src="../../../assets/images/logo.png" style="flex-shrink: 0"
          width=auto/>
     <span class="logoName">PackingPlans</span>
-    <a class="mat-button" mat-button style="margin-right: 1%">Locations</a>
-    <a class="mat-button" mat-button>How It Works</a>
+    <a (click)="logout()" class="mat-button" mat-button style="margin-right: 1%">Locations</a>
+    <a (click)="tryUser()" class="mat-button" mat-button>How It Works</a>
     <span class="spacer"></span>
     <a (click)="openLoginDialog()" class="mat-button" mat-button>
       <mat-icon [ngStyle]="{'color':'white'}" class="icon-display">perm_identity</mat-icon>
