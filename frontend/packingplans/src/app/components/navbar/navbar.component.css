@@ -26,3 +26,7 @@
   transform: scale(1.25) perspective(1px);
   text-shadow: 0px 0px 5px #80d4ff;
 }
+
+.username {
+  color: white !important;
+}

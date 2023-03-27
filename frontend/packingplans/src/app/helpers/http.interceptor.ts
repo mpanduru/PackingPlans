@@ -48,7 +48,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         this.eventBusService.emit(new EventData('logout', null));
       }
     }
-
     return next.handle(request);
   }
 }

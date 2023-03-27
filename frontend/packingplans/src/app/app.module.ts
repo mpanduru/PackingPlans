@@ -17,6 +17,7 @@ import {CarouselComponent} from './components/carousel/carousel.component';
 import {LoginComponent} from './components/login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import {httpInterceptorProviders} from "./helpers/http.interceptor";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {httpInterceptorProviders} from "./helpers/http.interceptor";
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [httpInterceptorProviders],

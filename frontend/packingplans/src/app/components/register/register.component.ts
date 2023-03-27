@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
 import {DialogService} from "../dialogService/dialog.service";
 import {AuthService} from "../../services/authService/auth.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import {AuthService} from "../../services/authService/auth.service";
   styleUrls: ['./register.component.css'],
 })
 
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   errorMessage = '';
   isSignUpFailed = false;
   registerForm = this.formBuilder.group({
@@ -20,12 +21,22 @@ export class RegisterComponent {
     confirmpassword: ['', [Validators.required, this.passwordValidator]]
   });
 
-  constructor(private formBuilder: FormBuilder, private dialogService: DialogService, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private dialogService: DialogService, private authService: AuthService, private snackBar: MatSnackBar) {
+  }
+
+  ngOnInit(): void {
   }
 
   moveToLogin() {
     this.dialogService.closeRegisterDialog();
     this.dialogService.openLoginDialog();
+  }
+
+  openSnackBar(): void {
+    this.snackBar.open('Your account has been successfully created!', 'Close', {
+      duration: 6000,
+      verticalPosition: 'top'
+    });
   }
 
   onSubmit(): void {
@@ -35,7 +46,8 @@ export class RegisterComponent {
       this.registerForm.controls.password.value || "").subscribe({
       next: data => {
         this.isSignUpFailed = false;
-        this.dialogService.closeRegisterDialog();
+        this.moveToLogin();
+        this.openSnackBar();
       },
       error: err => {
         this.isSignUpFailed = true;
