@@ -6,9 +6,14 @@
     <a class="mat-button" mat-button style="margin-right: 1%">Locations</a>
     <a class="mat-button" mat-button>How It Works</a>
     <span class="spacer"></span>
-    <a (click)="openLoginDialog()" class="mat-button" mat-button>
+    <a (click)="openLoginDialog()" *ngIf="!isLoggedIn" class="mat-button" mat-button>
       <mat-icon [ngStyle]="{'color':'white'}" class="icon-display">perm_identity</mat-icon>
       Log in
+    </a>
+    <span class="username" style="margin-right: 1%">{{username}}</span>
+    <a (click)="logout()" *ngIf="isLoggedIn" class="mat-button" mat-button>
+      <mat-icon [ngStyle]="{'color':'white'}" class="icon-display">exit_to_app</mat-icon>
+      Log out
     </a>
   </mat-toolbar>
 </div>

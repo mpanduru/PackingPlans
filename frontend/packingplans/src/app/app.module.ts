@@ -15,6 +15,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {HomepageComponent} from './components/homepage/homepage.component';
 import {CarouselComponent} from './components/carousel/carousel.component';
 import {LoginComponent} from './components/login/login.component';
+import {HttpClientModule} from '@angular/common/http';
+import {httpInterceptorProviders} from "./helpers/http.interceptor";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -38,10 +41,12 @@ import {LoginComponent} from './components/login/login.component';
     NoopAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule,
+    MatSnackBarModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

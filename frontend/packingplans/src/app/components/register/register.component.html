@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" class="login-form">
+<form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="login-form">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -7,39 +7,47 @@
         </div>
         <mat-form-field appearance="outline" class="form-field">
           <input formControlName="fullname" matInput placeholder="Full Name">
-          <mat-error *ngIf="loginForm.controls.fullname.errors?.['required']">Full Name is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.fullname.errors?.['required']">Full Name is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.fullname.errors?.['pattern']">Full Name's minimum length is 3
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
           <input formControlName="username" matInput placeholder="Username">
-          <mat-error *ngIf="loginForm.controls.username.errors?.['required']">Username is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.username.errors?.['required']">Username is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.username.errors?.['pattern']">Username's minimum length is 3
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
           <input formControlName="email" matInput placeholder="Email">
-          <mat-error *ngIf="loginForm.controls.email.errors?.['required']">Email is required</mat-error>
-          <mat-error *ngIf="loginForm.controls.email.errors?.['email']">Please enter a valid email</mat-error>
+          <mat-error *ngIf="registerForm.controls.email.errors?.['required']">Email is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.email.errors?.['email']">Please enter a valid email</mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
           <input formControlName="password" matInput placeholder="Password" type="password">
-          <mat-error *ngIf="loginForm.controls.password.errors?.['required']">Password is required</mat-error>
-          <mat-error *ngIf="loginForm.controls.password.errors?.['pattern']">Password must have at least 8 characters,
+          <mat-error *ngIf="registerForm.controls.password.errors?.['required']">Password is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.password.errors?.['pattern']">Password must have at least 8
+            characters,
             one uppercase letter, one lowercase letter and a symbol
           </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
           <input formControlName="confirmpassword" matInput placeholder="Confirm Password" type="password">
-          <mat-error *ngIf="loginForm.controls.confirmpassword.errors?.['required']">Password is required</mat-error>
-          <mat-error *ngIf="loginForm.controls.confirmpassword.errors?.['passwordValidator']">Passwords must match
+          <mat-error *ngIf="registerForm.controls.confirmpassword.errors?.['required']">Password is required</mat-error>
+          <mat-error *ngIf="registerForm.controls.confirmpassword.errors?.['passwordValidator']">Passwords must match
           </mat-error>
         </mat-form-field>
-        <button [disabled]="loginForm.invalid" class="rounded-4 register-button button-color" mat-raised-button>Register
+        <button [disabled]="registerForm.invalid" class="rounded-4 register-button button-color" mat-raised-button>
+          Register
           Now!
         </button>
         <div class="log-in-ref">
-          Already have an account? Log in <u><a (click)="moveToLogin()" class="fake-href">here</a></u>
+          Already have an account? Log in <u><a class="fake-href">here</a></u>
         </div>
       </div>
-      <div class="col register-image">
-        <!--        <img class="register-image" src="../../../assets/images/register_photo.png">-->
+      <div class="col register-image d-flex flex-column align-items-center justify-content-end">
+        <div *ngIf="isSignUpFailed" class="alert alert-info">
+          Registration failed!<br/>{{ errorMessage }}
+        </div>
       </div>
     </div>
   </div>
