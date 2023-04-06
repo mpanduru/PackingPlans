@@ -18,6 +18,10 @@ import {LoginComponent} from './components/login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import {httpInterceptorProviders} from "./helpers/http.interceptor";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {LocationCardComponent} from './components/location-card/location-card.component';
+import {LocationPageComponent} from './components/location-page/location-page.component';
+import {MatCardModule} from "@angular/material/card";
+import { LocationSearchComponent } from './components/location-search/location-search.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,10 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     NavbarComponent,
     LoginComponent,
     HomepageComponent,
-    CarouselComponent
+    CarouselComponent,
+    LocationCardComponent,
+    LocationPageComponent,
+    LocationSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatButtonModule,
     MatIconModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [httpInterceptorProviders],
