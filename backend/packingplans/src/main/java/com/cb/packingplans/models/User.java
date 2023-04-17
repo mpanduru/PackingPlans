@@ -35,6 +35,9 @@ public class User {
     @NotBlank
     private String password;
 
+    @ManyToMany(mappedBy = "users")
+    private Set<Trip> trips = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
