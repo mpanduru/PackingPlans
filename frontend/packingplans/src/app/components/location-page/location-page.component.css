@@ -2,6 +2,10 @@
   margin-top: 3%;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 19.3%);
+  grid-template-columns: repeat(4, 24%);
   row-gap: 3%;
+}
+
+.locations-page {
+  background-size: cover;
 }

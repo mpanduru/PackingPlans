@@ -21,7 +21,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {LocationCardComponent} from './components/location-card/location-card.component';
 import {LocationPageComponent} from './components/location-page/location-page.component';
 import {MatCardModule} from "@angular/material/card";
-import { LocationSearchComponent } from './components/location-search/location-search.component';
+import {LocationSearchComponent} from './components/location-search/location-search.component';
+import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { LocationSearchComponent } from './components/location-search/location-s
     MatIconModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MdbCarouselModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [httpInterceptorProviders],
