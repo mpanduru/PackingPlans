@@ -1,9 +1,11 @@
 package com.cb.packingplans.controllers;
 
+import com.cb.packingplans.models.Location;
 import com.cb.packingplans.models.Trip;
 import com.cb.packingplans.models.User;
-import com.cb.packingplans.payload.request.NewTripRequest;
+import com.cb.packingplans.payload.request.TripRequest;
 import com.cb.packingplans.payload.response.MessageResponse;
+import com.cb.packingplans.repository.LocationRepository;
 import com.cb.packingplans.repository.TripRepository;
 import com.cb.packingplans.repository.UserRepository;
 import com.cb.packingplans.security.jwt.JwtUtils;
@@ -22,6 +24,8 @@ public class TripController {
     @Autowired
     TripRepository tripRepository;
     @Autowired
+    LocationRepository locationRepository;
+    @Autowired
     private JwtUtils jwtUtils;
 
     @Autowired
@@ -29,14 +33,19 @@ public class TripController {
 
     @PostMapping("/new")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> addNewTrip(@RequestBody NewTripRequest newTripRequest, @CookieValue("packingplanslogin") String jwtToken) {
-        if (newTripRequest.getStartDate().isAfter(newTripRequest.getEndDate())) {
+    public ResponseEntity<?> addNewTrip(@RequestBody TripRequest tripRequest, @CookieValue("packingplanslogin") String jwtToken) {
+        if (tripRequest.getStartDate().isAfter(tripRequest.getEndDate())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Can not have start date after end date"));
         }
         String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
         Optional<User> userOptional = userRepository.findByUsername(username);
         if (userOptional.isPresent()) {
-            Trip trip = new Trip(newTripRequest.getStartDate(), newTripRequest.getEndDate());
+            Location location = locationRepository.findByName(tripRequest.getLocationName());
+            if (location == null) {
+                return ResponseEntity.badRequest().body(new MessageResponse("This location does not exist!"));
+            }
+            //to do verify if the exact same trip already exists for this user
+            Trip trip = new Trip(tripRequest.getStartDate(), tripRequest.getEndDate(), location);
             trip.getUsers().add(userOptional.get());
             tripRepository.save(trip);
             return ResponseEntity.ok().body(new MessageResponse("Trip added successfully"));

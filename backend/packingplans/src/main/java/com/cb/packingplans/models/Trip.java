@@ -30,11 +30,15 @@ public class Trip {
     private LocalDate startDate;
     @NotNull
     private LocalDate endDate;
-    private Long locationId;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id")
+    private Location location;
 
-    public Trip(LocalDate startDate, LocalDate endDate) {
+    public Trip(LocalDate startDate, LocalDate endDate, Location location) {
         this.startDate = startDate;
         this.endDate = endDate;
+        this.location = location;
     }
 
     public Trip() {
