@@ -21,7 +21,6 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {LocationCardComponent} from './components/location-card/location-card.component';
 import {LocationPageComponent} from './components/location-page/location-page.component';
 import {MatCardModule} from "@angular/material/card";
-import {LocationSearchComponent} from './components/location-search/location-search.component';
 import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
 import {LocationTagComponent} from './components/location-tag/location-tag.component';
 import {MatSelectModule} from "@angular/material/select";
@@ -36,7 +35,6 @@ import {MatSelectModule} from "@angular/material/select";
     CarouselComponent,
     LocationCardComponent,
     LocationPageComponent,
-    LocationSearchComponent,
     LocationTagComponent
   ],
   imports: [

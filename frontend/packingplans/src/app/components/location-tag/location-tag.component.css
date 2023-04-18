@@ -12,3 +12,7 @@
   margin-top: 3%;
   float: right;
 }
+
+.my-button:hover {
+  transform: scale(1.1);
+}

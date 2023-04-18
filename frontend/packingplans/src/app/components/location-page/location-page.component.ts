@@ -8,8 +8,8 @@ import {Component, OnInit} from '@angular/core';
 
 export class LocationPageComponent implements OnInit {
   tags: any[] | undefined;
-
-  cards: any[] | undefined;
+  allCards: any[] | undefined;
+  filteredCards: any[] | undefined;
 
   ngOnInit() {
     this.tags = [
@@ -22,29 +22,37 @@ export class LocationPageComponent implements OnInit {
       {
         name: "Tag3"
       }
-    ]
+    ];
 
-    this.cards = [
+    this.allCards = [
       {
-        title: "Card1",
+        title: "Paris",
         subtitle: "card1",
-        information: "location: Romania, city: Bucharest"
+        tags: "beach please"
       },
       {
-        title: "Card2",
+        title: "London",
         subtitle: "card2",
-        information: "location: Romania, city: Bucharest"
+        tags: "mountain bike"
       },
       {
-        title: "Card3",
+        title: "PaBuchrest",
         subtitle: "card3",
-        information: "location: Romania, city: Bucharest"
+        tags: "road highway"
       },
       {
-        title: "Card4",
+        title: "LonAltceva",
         subtitle: "card4",
-        information: "location: Romania, city: Bucharest"
+        tags: "historical"
       }
-    ]
+    ];
+
+    this.filteredCards = this.allCards;
+  }
+
+  searchCardsByName(name: string): void {
+    if (this.allCards) {
+      this.filteredCards = this.allCards.filter(card => card.title.toLowerCase().includes(name.toLowerCase()));
+    }
   }
 }
