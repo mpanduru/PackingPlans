@@ -10,6 +10,7 @@ html, body {
   background-position: center;
   position: absolute;
   width: 100%;
+  overflow-x: hidden;
 }
 
 body {

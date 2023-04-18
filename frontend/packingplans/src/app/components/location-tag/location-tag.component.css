@@ -1,16 +1,4 @@
-.card-wrapper {
-  margin-top: 3%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 24%);
-  row-gap: 3%;
-}
-
-.locations-page {
-  background-size: cover;
-}
-
-.all-tags {
+.my-button {
   background-color: #69a6f3; /* Green */
   border: none;
   color: white;

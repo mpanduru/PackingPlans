@@ -23,6 +23,8 @@ import {LocationPageComponent} from './components/location-page/location-page.co
 import {MatCardModule} from "@angular/material/card";
 import {LocationSearchComponent} from './components/location-search/location-search.component';
 import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
+import {LocationTagComponent} from './components/location-tag/location-tag.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
     CarouselComponent,
     LocationCardComponent,
     LocationPageComponent,
-    LocationSearchComponent
+    LocationSearchComponent,
+    LocationTagComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
     HttpClientModule,
     MatSnackBarModule,
     MatCardModule,
-    MdbCarouselModule
+    MdbCarouselModule,
+    MatSelectModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [httpInterceptorProviders],
