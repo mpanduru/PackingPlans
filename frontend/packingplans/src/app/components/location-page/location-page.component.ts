@@ -9,18 +9,21 @@ import {Component, OnInit} from '@angular/core';
 export class LocationPageComponent implements OnInit {
   tags: any[] | undefined;
   allCards: any[] | undefined;
+  searchFilteredCards: any[] | undefined;
+  tagFilteredCards: any[] | undefined;
   filteredCards: any[] | undefined;
+  activeTags: string[] = [];
 
   ngOnInit() {
     this.tags = [
       {
-        name: "Tag1"
+        name: "mountain"
       },
       {
-        name: "Tag2"
+        name: "beach"
       },
       {
-        name: "Tag3"
+        name: "bike"
       }
     ];
 
@@ -28,31 +31,72 @@ export class LocationPageComponent implements OnInit {
       {
         title: "Paris",
         subtitle: "card1",
-        tags: "beach please"
+        tags: ["beach", "bike"]
       },
       {
         title: "London",
         subtitle: "card2",
-        tags: "mountain bike"
+        tags: ["mountain", "bike"]
       },
       {
         title: "PaBuchrest",
         subtitle: "card3",
-        tags: "road highway"
+        tags: ["road", "highway"]
       },
       {
         title: "LonAltceva",
         subtitle: "card4",
-        tags: "historical"
+        tags: ["historical"]
       }
     ];
 
-    this.filteredCards = this.allCards;
+    this.searchFilteredCards = this.allCards;
+    this.tagFilteredCards = this.allCards;
+    this.refreshFilters();
   }
 
   searchCardsByName(name: string): void {
     if (this.allCards) {
-      this.filteredCards = this.allCards.filter(card => card.title.toLowerCase().includes(name.toLowerCase()));
+      this.searchFilteredCards = this.allCards.filter(card => card.title.toLowerCase().includes(name.toLowerCase()));
     }
+    this.refreshFilters();
+  }
+
+  tagOnClick(tagName: string): void {
+    if (this.isActive(tagName)) {
+      this.removeTag(tagName);
+      this.refreshTagFilters();
+    } else {
+      this.addTag(tagName);
+      this.refreshTagFilters();
+    }
+    this.refreshFilters();
+  }
+
+  private addTag(tagName: string): void {
+    this.activeTags.push(tagName);
+  }
+
+  private removeTag(tagName: string): void {
+    const index = this.activeTags.indexOf(tagName);
+    if (index != -1)
+      this.activeTags.splice(index, 1);
+  }
+
+  private isActive(tagName: string): boolean {
+    return this.activeTags.includes(tagName);
+  }
+
+  private refreshFilters(): void {
+    this.filteredCards = this.searchFilteredCards?.filter(card => this.tagFilteredCards?.includes(card));
+  }
+
+  private refreshTagFilters(): void {
+    if (this.activeTags.length != 0)
+      this.tagFilteredCards = this.allCards?.filter(card => {
+        return this.activeTags.every(tag => card.tags.includes(tag));
+      });
+    else
+      this.tagFilteredCards = this.allCards;
   }
 }

@@ -10,7 +10,9 @@
       </div>
     </div>
     <div class="col right-margin">
-      <app-location-tag *ngFor="let tag of tags" [tagName]="tag.name"></app-location-tag>
+      <app-location-tag (click)="tagOnClick(tag.name)" *ngFor="let tag of tags"
+                        [isActive]="activeTags.includes(tag.name)"
+                        [tagName]="tag.name"></app-location-tag>
     </div>
   </div>
   <div class="card-wrapper">

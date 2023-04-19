@@ -16,3 +16,12 @@
 .my-button:hover {
   transform: scale(1.1);
 }
+
+.active {
+  background-color: #485973 !important;
+  font-size: 17px;
+}
+
+.active:hover {
+  transform: scale(1) !important;
+}

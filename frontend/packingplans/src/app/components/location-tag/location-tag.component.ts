@@ -7,4 +7,5 @@ import {Component, Input} from '@angular/core';
 })
 export class LocationTagComponent {
   @Input() tagName: string | undefined;
+  @Input() isActive: boolean | undefined;
 }
