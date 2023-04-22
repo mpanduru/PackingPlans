@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="card-wrapper">
-    <app-location-card *ngFor="let card of filteredCards" [information]="card.tags" [subtitle]="card.subtitle"
-                       [title]="card.title"></app-location-card>
+    <app-location-card *ngFor="let card of filteredCards" [information]="card.tagNames" [subtitle]="card.coordinates"
+                       [title]="card.name" [photoPath]="card.imageUrl"></app-location-card>
   </div>
 </div>
