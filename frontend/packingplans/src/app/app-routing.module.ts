@@ -1,10 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomepageComponent} from "./components/homepage/homepage.component";
+import {HomepageComponent} from "./pages/homepage/homepage.component";
+import {LocationPageComponent} from "./pages/location-page/location-page.component";
 
 const routes: Routes = [
   {path: "home", title: "PackingPlans - Home", component: HomepageComponent},
-  {path: "", redirectTo: "/home", pathMatch: "full"}
+  {path: "", redirectTo: "/home", pathMatch: "full"},
+  {path: "locations", title: "PackingPlans - Locations", component: LocationPageComponent}
 ];
 
 @NgModule({

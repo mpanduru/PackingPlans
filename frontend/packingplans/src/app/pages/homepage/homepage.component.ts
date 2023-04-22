@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {SlideInterface} from "../carousel/slide";
+import {SlideInterface} from "../../components/carousel/slide";
 
 @Component({
   selector: 'app-homepage',

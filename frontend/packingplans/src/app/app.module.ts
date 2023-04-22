@@ -12,12 +12,18 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {HomepageComponent} from './components/homepage/homepage.component';
+import {HomepageComponent} from './pages/homepage/homepage.component';
 import {CarouselComponent} from './components/carousel/carousel.component';
 import {LoginComponent} from './components/login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import {httpInterceptorProviders} from "./helpers/http.interceptor";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {LocationCardComponent} from './components/location-card/location-card.component';
+import {LocationPageComponent} from './pages/location-page/location-page.component';
+import {MatCardModule} from "@angular/material/card";
+import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
+import {LocationTagComponent} from './components/location-tag/location-tag.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -26,7 +32,10 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     NavbarComponent,
     LoginComponent,
     HomepageComponent,
-    CarouselComponent
+    CarouselComponent,
+    LocationCardComponent,
+    LocationPageComponent,
+    LocationTagComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +52,10 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatButtonModule,
     MatIconModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule,
+    MdbCarouselModule,
+    MatSelectModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [httpInterceptorProviders],

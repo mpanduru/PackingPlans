@@ -1,0 +1,22 @@
+<div>
+  <div class="row">
+    <div class="col">
+      <div class="d-flex mt-3">
+        <mat-form-field class="searchinput">
+          <mat-label>Search locations by name</mat-label>
+          <input #txtVal (input)="searchCardsByName(txtVal.value)" matInput/>
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col right-margin">
+      <app-location-tag (click)="tagOnClick(tag.name)" *ngFor="let tag of tags"
+                        [isActive]="activeTags.includes(tag.name)"
+                        [tagName]="tag.name"></app-location-tag>
+    </div>
+  </div>
+  <div class="card-wrapper">
+    <app-location-card *ngFor="let card of filteredCards" [information]="card.tags" [subtitle]="card.subtitle"
+                       [title]="card.title"></app-location-card>
+  </div>
+</div>

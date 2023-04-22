@@ -1,0 +1,16 @@
+.example-card {
+  max-width: 100%;
+  margin-left: 15%;
+  background-color: #b5b2bd;
+  border-radius: 15px;
+}
+
+.example-header-image {
+  background-image: url('https://media.cntraveller.com/photos/6220bfe35e6084e5d4f02404/4:3/w_5120,h_3840,c_limit/Seine%20paris%20bike-GettyImages-1161606501.jpeg');
+  background-size: cover;
+}
+
+.location-card:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}

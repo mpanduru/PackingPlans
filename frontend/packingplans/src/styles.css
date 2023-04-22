@@ -1,8 +1,16 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+/*@import "mdb-angular-ui-kit/assets/scss/mdb.scss";*/
 /* You can add global styles to this file, and also import other style files */
 
 html, body {
   height: 100%;
+  background-image: url("src/assets/images/background.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  position: absolute;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -22,4 +30,3 @@ body {
 .mat-mdc-button {
   color: #bebe58 !important;
 }
-

@@ -1,0 +1,27 @@
+.my-button {
+  background-color: #69a6f3; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 15px;
+  margin-right: 2%;
+  margin-top: 3%;
+  float: right;
+}
+
+.my-button:hover {
+  transform: scale(1.1);
+}
+
+.active {
+  background-color: #485973 !important;
+  font-size: 17px;
+}
+
+.active:hover {
+  transform: scale(1) !important;
+}

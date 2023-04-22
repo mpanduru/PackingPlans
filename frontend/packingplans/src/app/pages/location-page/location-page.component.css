@@ -1,0 +1,39 @@
+.card-wrapper {
+  margin-top: 3%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 24%);
+  row-gap: 3%;
+}
+
+.locations-page {
+  background-size: cover;
+}
+
+.all-tags {
+  background-color: #69a6f3; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 15px;
+  margin-right: 2%;
+  margin-top: 3%;
+  float: right;
+}
+
+.searchinput {
+  width: 40%;
+  height: 2%;
+  margin-top: 1%;
+  margin-left: 3%;
+  border-radius: 28px 0 0 28px !important;
+}
+
+.right-margin {
+  margin-right: 1%;
+}
+

@@ -1,23 +1,82 @@
-<div class="slider">
-  <!--  to do add fade between slides [ngClass]="{'fade-in': currentIndex % 2 == 1, 'fade-out': currentIndex % 2 == 0}"-->
-  <div>
-    <div (click)="goToPrevious()" class="leftArrow">❰</div>
-    <div (click)="goToNext()" class="rightArrow">❱</div>
-  </div>
-  <div
-    [ngStyle]="{ 'background-image': getCurrentSlideUrl() }"
-    class="slide"
-  >
+<mdb-carousel [animation]="'fade'" [interval]="3000" [pause]="false">
+  <mdb-carousel-item>
+    <img
+      alt="..."
+      class="d-block w-100"
+      src="./assets/images/carousel1.jpg"
+    />
     <div class="container">
       <div class="text">
         Can not wait for your next trip?
       </div>
       <div class="text">
-        <button class="rounded-4 my-custom-button" mat-raised-button>Start planing now
+        <button class="rounded-4 my-custom-button" mat-raised-button routerLink="/locations">Start planing now
         </button>
       </div>
-
     </div>
-
-  </div>
-</div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img
+      alt="..."
+      class="d-block w-100"
+      src="./assets/images/carousel2.jpg"
+    />
+    <div class="container">
+      <div class="text">
+        Can not wait for your next trip?
+      </div>
+      <div class="text">
+        <button class="rounded-4 my-custom-button" mat-raised-button routerLink="/locations">Start planing now
+        </button>
+      </div>
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img
+      alt="..."
+      class="d-block w-100"
+      src="./assets/images/carousel3.jpg"
+    />
+    <div class="container">
+      <div class="text">
+        Can not wait for your next trip?
+      </div>
+      <div class="text">
+        <button class="rounded-4 my-custom-button" mat-raised-button routerLink="/locations">Start planing now
+        </button>
+      </div>
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img
+      alt="..."
+      class="d-block w-100"
+      src="./assets/images/carousel4.jpg"
+    />
+    <div class="container">
+      <div class="text">
+        Can not wait for your next trip?
+      </div>
+      <div class="text">
+        <button class="rounded-4 my-custom-button" mat-raised-button routerLink="/locations">Start planing now
+        </button>
+      </div>
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img
+      alt="..."
+      class="d-block w-100"
+      src="./assets/images/carousel5.jpg"
+    />
+    <div class="container">
+      <div class="text">
+        Can not wait for your next trip?
+      </div>
+      <div class="text">
+        <button class="rounded-4 my-custom-button" mat-raised-button routerLink="/locations">Start planing now
+        </button>
+      </div>
+    </div>
+  </mdb-carousel-item>
+</mdb-carousel>
