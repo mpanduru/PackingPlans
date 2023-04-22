@@ -1,5 +1,12 @@
 package com.cb.packingplans.payload.response;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter
+@Setter
 public class LocationResponse {
 
     private Long id;
@@ -7,52 +14,14 @@ public class LocationResponse {
     private String description;
     private String coordinates;
     private String imageUrl;
+    private List<String> tagNames;
 
-    public LocationResponse(Long id, String name, String description, String coordinates, String imageUrl) {
+    public LocationResponse(Long id, String name, String description, String coordinates, String imageUrl, List<String> tagNames) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.coordinates = coordinates;
         this.imageUrl = imageUrl;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(String coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.tagNames = tagNames;
     }
 }

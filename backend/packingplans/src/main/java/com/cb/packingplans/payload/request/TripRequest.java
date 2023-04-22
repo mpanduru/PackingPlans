@@ -19,5 +19,4 @@ public class TripRequest {
     private LocalDate endDate;
     @NotBlank
     private String locationName;
-
 }

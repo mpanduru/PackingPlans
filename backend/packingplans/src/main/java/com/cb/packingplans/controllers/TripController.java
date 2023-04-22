@@ -38,15 +38,15 @@ public class TripController {
             return ResponseEntity.badRequest().body(new MessageResponse("Can not have start date after end date"));
         }
         String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
-        Optional<User> userOptional = userRepository.findByUsername(username);
-        if (userOptional.isPresent()) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
             Location location = locationRepository.findByName(tripRequest.getLocationName());
             if (location == null) {
                 return ResponseEntity.badRequest().body(new MessageResponse("This location does not exist!"));
             }
             //to do verify if the exact same trip already exists for this user
             Trip trip = new Trip(tripRequest.getStartDate(), tripRequest.getEndDate(), location);
-            trip.getUsers().add(userOptional.get());
+            trip.getUsers().add(user.get());
             tripRepository.save(trip);
             return ResponseEntity.ok().body(new MessageResponse("Trip added successfully"));
         }

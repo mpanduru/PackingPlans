@@ -4,10 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 public class LocationRequest {
-    
+
     @NotBlank
     private String name;
     @NotBlank
@@ -16,4 +18,5 @@ public class LocationRequest {
     private String coordinates;
     @NotBlank
     private String imageUrl;
+    private Set<String> tagNames;
 }
