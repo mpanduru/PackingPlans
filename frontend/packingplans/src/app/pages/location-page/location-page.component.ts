@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {LocationService} from "../../services/locationService/location.service";
+import {TagService} from "../../services/tagService/tag.service";
 
 @Component({
   selector: 'app-location-page',
@@ -14,50 +16,34 @@ export class LocationPageComponent implements OnInit {
   filteredCards: any[] | undefined;
   activeTags: string[] = [];
 
+
+  constructor(private locationService: LocationService, private tagService: TagService) {
+  }
+
   ngOnInit() {
-    this.tags = [
-      {
-        name: "mountain"
-      },
-      {
-        name: "beach"
-      },
-      {
-        name: "bike"
-      }
-    ];
+    this.locationService.getAllLocations().subscribe({
+      next: cards => {
+        this.allCards = cards;
 
-    this.allCards = [
-      {
-        title: "Paris",
-        subtitle: "card1",
-        tags: ["beach", "bike"]
-      },
-      {
-        title: "London",
-        subtitle: "card2",
-        tags: ["mountain", "bike"]
-      },
-      {
-        title: "PaBuchrest",
-        subtitle: "card3",
-        tags: ["road", "highway"]
-      },
-      {
-        title: "LonAltceva",
-        subtitle: "card4",
-        tags: ["historical"]
-      }
-    ];
+        this.tagService.getAllTags().subscribe({
+          next: tags => {
+            this.tags = tags;
+          }
+        });
 
-    this.searchFilteredCards = this.allCards;
-    this.tagFilteredCards = this.allCards;
-    this.refreshFilters();
+        this.searchFilteredCards = this.allCards;
+        this.tagFilteredCards = this.allCards;
+        this.refreshFilters();
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   searchCardsByName(name: string): void {
     if (this.allCards) {
-      this.searchFilteredCards = this.allCards.filter(card => card.title.toLowerCase().includes(name.toLowerCase()));
+      this.searchFilteredCards = this.allCards.filter(card => card.name .toLowerCase().includes(name.toLowerCase()));
     }
     this.refreshFilters();
   }
@@ -67,13 +53,13 @@ export class LocationPageComponent implements OnInit {
       this.removeTag(tagName);
       this.refreshTagFilters();
     } else {
-      this.addTag(tagName);
+      this.activateTag(tagName);
       this.refreshTagFilters();
     }
     this.refreshFilters();
   }
 
-  private addTag(tagName: string): void {
+  private activateTag(tagName: string): void {
     this.activeTags.push(tagName);
   }
 
@@ -94,7 +80,7 @@ export class LocationPageComponent implements OnInit {
   private refreshTagFilters(): void {
     if (this.activeTags.length != 0)
       this.tagFilteredCards = this.allCards?.filter(card => {
-        return this.activeTags.every(tag => card.tags.includes(tag));
+        return this.activeTags.every(tag => card.tagNames.includes(tag));
       });
     else
       this.tagFilteredCards = this.allCards;
