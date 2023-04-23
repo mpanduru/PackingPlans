@@ -1,5 +1,6 @@
 package com.cb.packingplans.payload.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class LocationResponse {
 
     private Long id;
@@ -15,13 +17,4 @@ public class LocationResponse {
     private String coordinates;
     private String imageUrl;
     private List<String> tagNames;
-
-    public LocationResponse(Long id, String name, String description, String coordinates, String imageUrl, List<String> tagNames) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.coordinates = coordinates;
-        this.imageUrl = imageUrl;
-        this.tagNames = tagNames;
-    }
 }

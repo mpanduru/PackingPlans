@@ -1,16 +1,16 @@
 package com.cb.packingplans.controllers;
 
-import com.cb.packingplans.models.ERole;
-import com.cb.packingplans.models.Role;
+import com.cb.packingplans.converters.UserConverter;
+import com.cb.packingplans.exceptions.RegisterException;
 import com.cb.packingplans.models.User;
 import com.cb.packingplans.payload.request.LoginRequest;
 import com.cb.packingplans.payload.request.SignupRequest;
 import com.cb.packingplans.payload.response.MessageResponse;
 import com.cb.packingplans.payload.response.UserInfoResponse;
-import com.cb.packingplans.repository.RoleRepository;
-import com.cb.packingplans.repository.UserRepository;
 import com.cb.packingplans.security.jwt.JwtUtils;
 import com.cb.packingplans.security.services.UserDetailsImpl;
+import com.cb.packingplans.services.RoleService;
+import com.cb.packingplans.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,29 +23,24 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    @Autowired
-    AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
-
+    private UserService userService;
     @Autowired
-    RoleRepository roleRepository;
-
+    private RoleService roleService;
     @Autowired
-    PasswordEncoder encoder;
-
+    private AuthenticationManager authenticationManager;
     @Autowired
-    JwtUtils jwtUtils;
+    private JwtUtils jwtUtils;
+    @Autowired
+    private PasswordEncoder encoder;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -72,47 +67,13 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+        try {
+            User user = UserConverter.signUpRequestToUser(signUpRequest, encoder, roleService);
+            User newUser = userService.registerUser(user);
+            return ResponseEntity.ok(UserConverter.userToUserInfoResponse(newUser));
+        } catch (RegisterException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
-        }
-
-        // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                signUpRequest.getFullname(),
-                encoder.encode(signUpRequest.getPassword()));
-
-        Set<String> strRoles = signUpRequest.getRole();
-        Set<Role> roles = new HashSet<>();
-
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
-        }
-
-        user.setRoles(roles);
-        userRepository.save(user);
-
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
     @PostMapping("/signout")

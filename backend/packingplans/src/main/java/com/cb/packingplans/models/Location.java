@@ -3,6 +3,7 @@ package com.cb.packingplans.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Table(name = "locations")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Location {
 
     @Id
@@ -40,9 +42,5 @@ public class Location {
         this.description = description;
         this.coordinates = coordinates;
         this.imageUrl = imageUrl;
-    }
-
-    public Location() {
-
     }
 }
