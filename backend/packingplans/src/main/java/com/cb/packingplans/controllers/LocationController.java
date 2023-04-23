@@ -31,9 +31,9 @@ public class LocationController {
     public ResponseEntity<?> addNewLocation(@RequestBody LocationRequest locationRequest) {
 
         try {
-            Location location = LocationConverter.locationRequestToLocation(locationRequest, tagService);
+            Location location = LocationConverter.convertLocationRequestToLocation(locationRequest, tagService);
             Location newLocation = locationService.addLocation(location);
-            return ResponseEntity.ok(LocationConverter.locationToLocationResponse(location));
+            return ResponseEntity.ok(LocationConverter.convertLocationToLocationResponse(location));
         } catch (DuplicateLocationException e) {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
         }
@@ -45,7 +45,7 @@ public class LocationController {
         List<LocationResponse> locationResponseList = new ArrayList<>();
         locations.forEach(l -> {
             locationResponseList.add(
-                    LocationConverter.locationToLocationResponse(l));
+                    LocationConverter.convertLocationToLocationResponse(l));
         });
         return ResponseEntity.ok().body(locationResponseList);
     }

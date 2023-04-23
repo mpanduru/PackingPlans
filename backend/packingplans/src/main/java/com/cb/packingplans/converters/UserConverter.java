@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class UserConverter {
 
-    public static User signUpRequestToUser(SignupRequest signUpRequest, PasswordEncoder encoder, RoleService roleService) {
+    public static User convertSignUpRequestToUser(SignupRequest signUpRequest, PasswordEncoder encoder, RoleService roleService) {
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 signUpRequest.getFullname(),
@@ -42,7 +42,7 @@ public class UserConverter {
         return user;
     }
 
-    public static UserInfoResponse userToUserInfoResponse(User user) {
+    public static UserInfoResponse convertUserToUserInfoResponse(User user) {
         List<String> roles = user.getRoles().stream()
                 .map(Role::getName)
                 .map(ERole::name).toList();

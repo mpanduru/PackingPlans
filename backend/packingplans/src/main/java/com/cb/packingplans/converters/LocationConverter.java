@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 public class LocationConverter {
-    public static Location locationRequestToLocation(LocationRequest locationRequest, TagService tagService) {
+    public static Location convertLocationRequestToLocation(LocationRequest locationRequest, TagService tagService) {
         Location location = new Location(locationRequest.getName(), locationRequest.getDescription(), locationRequest.getCoordinates(), locationRequest.getImageUrl());
         Set<String> tagNames = locationRequest.getTagNames();
         Set<Tag> tags = new HashSet<>();
@@ -29,7 +29,7 @@ public class LocationConverter {
         return location;
     }
 
-    public static LocationResponse locationToLocationResponse(Location location) {
+    public static LocationResponse convertLocationToLocationResponse(Location location) {
         List<String> tagNames = location.getTags().stream()
                 .map(Tag::getName).toList();
         return new LocationResponse(location.getId(), location.getName(), location.getDescription(), location.getCoordinates(), location.getImageUrl(), tagNames);
