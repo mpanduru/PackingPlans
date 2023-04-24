@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class LocationConverter {
     public static Location convertLocationRequestToLocation(LocationRequest locationRequest, TagService tagService) {
-        Location location = new Location(locationRequest.getName(), locationRequest.getDescription(), locationRequest.getCoordinates(), locationRequest.getImageUrl());
+        Location location = new Location(locationRequest.getName(), locationRequest.getDescription(), locationRequest.getCoordinates(), locationRequest.getCountry(), locationRequest.getImageUrl());
         Set<String> tagNames = locationRequest.getTagNames();
         Set<Tag> tags = new HashSet<>();
         if (tagNames != null) {
@@ -32,6 +32,6 @@ public class LocationConverter {
     public static LocationResponse convertLocationToLocationResponse(Location location) {
         List<String> tagNames = location.getTags().stream()
                 .map(Tag::getName).toList();
-        return new LocationResponse(location.getId(), location.getName(), location.getDescription(), location.getCoordinates(), location.getImageUrl(), tagNames);
+        return new LocationResponse(location.getId(), location.getName(), location.getDescription(), location.getCoordinates(), location.getCountry(), location.getImageUrl(), tagNames);
     }
 }

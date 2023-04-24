@@ -26,6 +26,8 @@ public class Location {
     @NotBlank
     private String coordinates;
     @NotBlank
+    private String country;
+    @NotBlank
     private String imageUrl;
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Trip> trips = new HashSet<>();
@@ -37,10 +39,11 @@ public class Location {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags = new HashSet<>();
 
-    public Location(String name, String description, String coordinates, String imageUrl) {
+    public Location(String name, String description, String coordinates, String country, String imageUrl) {
         this.name = name;
         this.description = description;
         this.coordinates = coordinates;
+        this.country = country;
         this.imageUrl = imageUrl;
     }
 }
