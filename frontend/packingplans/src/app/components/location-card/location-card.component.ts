@@ -9,5 +9,5 @@ export class LocationCardComponent {
   @Input() name: string | undefined;
   @Input() country: string | undefined;
   @Input() photoPath: string | undefined;
-  @Input() tags: string | undefined;
+  @Input() tags: any[] | undefined;
 }

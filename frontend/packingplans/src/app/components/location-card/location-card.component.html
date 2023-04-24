@@ -2,17 +2,22 @@
   <mat-card class="example-card">
     <mat-card-header>
       <!--      <div class="example-header-image" mat-card-avatar></div>-->
-      <mat-card-title>{{name}}</mat-card-title>
-      <mat-card-subtitle class="mb-2">{{country}}</mat-card-subtitle>
+      <mat-card-title class="card-name">{{name}}</mat-card-title>
+      <mat-card-subtitle class="mb-2 country">{{country}}</mat-card-subtitle>
     </mat-card-header>
     <img alt="{{name}} photo" mat-card-image
          src="{{photoPath}}"
          style="max-width: 98%; margin-left: 1%; height: 250px;">
-    <mat-card-content class="mt-2">
-      <p>
-        {{tags}}
-      </p>
-    </mat-card-content>
+    <div class="mt-2 ms-4 mb-1 aligned">
+      <div class="row">
+        <div class="col icon me-1">
+          <mat-icon>local_offer</mat-icon>
+        </div>
+        <div class="col tags">
+          {{tags}}
+        </div>
+      </div>
+    </div>
     <!--    <mat-card-actions>-->
     <!--      <button mat-button>LIKE</button>-->
     <!--      <button mat-button>SHARE</button>-->
