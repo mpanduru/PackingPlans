@@ -3,6 +3,7 @@ package com.cb.packingplans.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Table(name = "trips")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Trip {
 
     @Id
@@ -39,8 +41,5 @@ public class Trip {
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
-    }
-
-    public Trip() {
     }
 }
