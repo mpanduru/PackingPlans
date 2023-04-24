@@ -6,8 +6,8 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./location-card.component.css']
 })
 export class LocationCardComponent {
-  @Input() title: string | undefined;
-  @Input() subtitle: string | undefined;
+  @Input() name: string | undefined;
+  @Input() country: string | undefined;
   @Input() photoPath: string | undefined;
-  @Input() information: string | undefined;
+  @Input() tags: string | undefined;
 }
