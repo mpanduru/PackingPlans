@@ -1,0 +1,25 @@
+.location-image {
+  background-size: cover;
+  width: 100%;
+  height: 700px;
+}
+
+.title {
+  margin-left: 6.4%;
+  margin-top: 1%;
+  font-weight: 400;
+}
+
+.descripion {
+  margin-left: 5%;
+  font-size: x-large;
+  padding: 0;
+  max-width: 100%;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.calendar {
+  margin-left: 40%;
+  width: 100%;
+}
