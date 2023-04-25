@@ -23,3 +23,20 @@
   margin-left: 40%;
   width: 100%;
 }
+
+.tags {
+  background-color: #6e6e6e; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  border-radius: 15px;
+  margin-right: 4%;
+  float: right;
+  /*width: 5%;*/
+  height: 50%;
+  margin-top: 3%;
+}
