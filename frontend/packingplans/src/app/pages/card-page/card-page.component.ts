@@ -1,4 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {LocationService} from "../../services/locationService/location.service";
 
 @Component({
   selector: 'app-card-page',
@@ -6,14 +8,29 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./card-page.component.css']
 })
 export class CardPageComponent implements OnInit {
-  @Input() location: any | undefined;
+  id: number | undefined;
+  location: any | undefined;
+  protected readonly Number = Number;
+
+  constructor(private locationService: LocationService, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.location = {
-      "name": "Paris",
-      "imageUrl": "../../../assets/images/paris_image.jpg",
-      "tags": ["fun", "romantic"],
-      "description": "Paris is a beautiful place in France. You will love it there"
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+    });
+
+    console.log(this.id);
+
+    if (this.id) {
+      this.locationService.getLocationById(this.id).subscribe({
+        next: location => {
+          this.location = location;
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
     }
   }
 }

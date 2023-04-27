@@ -27,6 +27,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {CardPageComponent} from './pages/card-page/card-page.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import {AgmCoreModule} from "@agm/core";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,10 @@ import {MatNativeDateModule} from "@angular/material/core";
     MdbCarouselModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBNqPlc0-a9AsgTOnR9GR7dN5lp-hiXWDw'
+    })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [httpInterceptorProviders],
