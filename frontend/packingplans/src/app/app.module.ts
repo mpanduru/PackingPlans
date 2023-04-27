@@ -28,6 +28,7 @@ import {CardPageComponent} from './pages/card-page/card-page.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {AgmCoreModule} from "@agm/core";
+import { DatePickerComponent } from './components/date-picker/date-picker.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {AgmCoreModule} from "@agm/core";
     LocationCardComponent,
     LocationPageComponent,
     LocationTagComponent,
-    CardPageComponent
+    CardPageComponent,
+    DatePickerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,33 +1,25 @@
 <div style="background-color: white">
-  <img alt="Location image" class="location-image" src="{{location.imageUrl}}">
-
-  <div class="row">
-    <div class="col-sm-8"><p class="display-3 title">{{location.name}}</p></div>
-    <div class="col-sm-4">
+  <div [ngStyle]="{ 'background-image': 'url(' + location.imageUrl + ')'}" class="row background-image">
+    <p class="display-3 title">{{location.name}}</p>
+    <div style="margin-left: 6.4%">
       <button *ngFor="let tag of location.tagNames" class="tags" disabled>
         {{tag}}
       </button>
     </div>
   </div>
-  <div class="row">
+  <div class="row mt-5">
     <div class="col-sm-8 descripion">&nbsp;&nbsp;
       {{location.description}}
     </div>
     <div class="col-sm-2 ">
-      <!--      <mat-card class="calendar">-->
-      <!--        <mat-calendar></mat-calendar>-->
-      <!--      </mat-card>-->
-      <mat-form-field appearance='fill'>
-        <mat-date-range-input [rangePicker]='picker'/>
-        <mat-datepicker-toggle [for]='picker'></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-      </mat-form-field>
+      <app-date-picker [selectedRangeValue]="selectedDateRange" class="calendar"></app-date-picker>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
-      <agm-map [latitude]="Number(location.latitude)" [longitude]="Number(location.longitude)">
+      <agm-map [latitude]="Number(location.latitude)" [longitude]="Number(location.longitude)" [styles]="styles"
+               [zoom]="10">
         <agm-marker [latitude]="Number(location.latitude)" [longitude]="Number(location.longitude)"></agm-marker>
       </agm-map>
     </div>

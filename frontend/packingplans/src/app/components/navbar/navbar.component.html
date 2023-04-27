@@ -3,10 +3,11 @@
     <img alt="Packing plans Logo" height="100%" routerLink="/home" src="../../../assets/images/logo.png"
          style="flex-shrink: 0; cursor: pointer" width=auto/>
     <span class="logoName">PackingPlans</span>
-    <a class="mat-button" mat-button routerLink="/locations" style="margin-right: 1%">Locations</a>
-    <a class="mat-button" mat-button>How It Works</a>
+    <a class="mat-button" mat-button routerLink="/locations" style="margin-right: 1%; font-family: 'Madera Regular'">Locations</a>
+    <a class="mat-button" mat-button style="font-family: 'Madera Regular'">How It Works</a>
     <span class="spacer"></span>
-    <a (click)="openLoginDialog()" *ngIf="!isLoggedIn" class="mat-button" mat-button>
+    <a (click)="openLoginDialog()" *ngIf="!isLoggedIn" class="mat-button" mat-button
+       style="font-family: 'Madera Regular'">
       <mat-icon [ngStyle]="{'color':'white'}" class="icon-display">perm_identity</mat-icon>
       Log in
     </a>
