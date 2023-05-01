@@ -22,6 +22,7 @@ public class Location {
     @NotBlank
     private String name;
     @NotBlank
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
     @NotBlank
     private String latitude;
