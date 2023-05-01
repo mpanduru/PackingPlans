@@ -24,6 +24,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
 import {LocationTagComponent} from './components/location-tag/location-tag.component';
 import {MatSelectModule} from "@angular/material/select";
+import {FooterComponent} from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {MatSelectModule} from "@angular/material/select";
     CarouselComponent,
     LocationCardComponent,
     LocationPageComponent,
-    LocationTagComponent
+    LocationTagComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
