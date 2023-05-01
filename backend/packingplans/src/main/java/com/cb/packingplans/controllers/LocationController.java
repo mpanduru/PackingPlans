@@ -34,7 +34,7 @@ public class LocationController {
         try {
             Location location = LocationConverter.convertLocationRequestToLocation(locationRequest, tagService);
             Location newLocation = locationService.addLocation(location);
-            return ResponseEntity.ok(LocationConverter.convertLocationToLocationResponse(location));
+            return ResponseEntity.ok(LocationConverter.convertLocationToLocationResponse(newLocation));
         } catch (DuplicateLocationException e) {
             return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
         }

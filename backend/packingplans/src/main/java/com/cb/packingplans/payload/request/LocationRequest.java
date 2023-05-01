@@ -19,6 +19,8 @@ public class LocationRequest {
     @NotBlank
     private String longitude;
     @NotBlank
+    private String country;
+    @NotBlank
     private String imageUrl;
     private Set<String> tagNames;
 }

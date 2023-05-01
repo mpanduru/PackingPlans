@@ -29,6 +29,8 @@ public class Location {
     @NotBlank
     private String longitude;
     @NotBlank
+    private String country;
+    @NotBlank
     private String imageUrl;
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Trip> trips = new HashSet<>();

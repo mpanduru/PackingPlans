@@ -14,3 +14,29 @@
   cursor: pointer;
   transform: scale(1.05);
 }
+
+.country {
+  font-size: 15px;
+}
+
+.card-name {
+  font-size: 22px;
+}
+
+.tags {
+  font-size: 16px;
+  margin-top: 2px;
+  text-align: start;
+  padding: 0px;
+}
+
+.icon {
+  text-align: end;
+  padding: 0px;
+}
+
+.aligned {
+  align-items: center;
+  display: flex;
+  color: #737373;
+}
