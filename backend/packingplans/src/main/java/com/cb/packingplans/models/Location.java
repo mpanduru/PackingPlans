@@ -42,11 +42,12 @@ public class Location {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags = new HashSet<>();
 
-    public Location(String name, String description, String latitude, String longitude, String imageUrl) {
+    public Location(String name, String description, String latitude, String longitude, String country, String imageUrl) {
         this.name = name;
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.country = country;
         this.imageUrl = imageUrl;
     }
 }
