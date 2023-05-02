@@ -14,7 +14,8 @@ public class LocationResponse {
     private Long id;
     private String name;
     private String description;
-    private String coordinates;
+    private String latitude;
+    private String longitude;
     private String country;
     private String imageUrl;
     private List<String> tagNames;

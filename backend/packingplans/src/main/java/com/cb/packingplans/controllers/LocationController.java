@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -48,5 +49,13 @@ public class LocationController {
                     LocationConverter.convertLocationToLocationResponse(l));
         });
         return ResponseEntity.ok().body(locationResponseList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getLocationById(@PathVariable("id") Long id) {
+        Optional<Location> location = locationService.getLocationById(id);
+        if (location.isPresent())
+            return ResponseEntity.ok(LocationConverter.convertLocationToLocationResponse(location.get()));
+        return ResponseEntity.badRequest().body(new MessageResponse("Location not found!"));
     }
 }

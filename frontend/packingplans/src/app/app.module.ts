@@ -24,6 +24,11 @@ import {MatCardModule} from "@angular/material/card";
 import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
 import {LocationTagComponent} from './components/location-tag/location-tag.component';
 import {MatSelectModule} from "@angular/material/select";
+import {CardPageComponent} from './pages/card-page/card-page.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {AgmCoreModule} from "@agm/core";
+import { DatePickerComponent } from './components/date-picker/date-picker.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +40,9 @@ import {MatSelectModule} from "@angular/material/select";
     CarouselComponent,
     LocationCardComponent,
     LocationPageComponent,
-    LocationTagComponent
+    LocationTagComponent,
+    CardPageComponent,
+    DatePickerComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +62,12 @@ import {MatSelectModule} from "@angular/material/select";
     MatSnackBarModule,
     MatCardModule,
     MdbCarouselModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBNqPlc0-a9AsgTOnR9GR7dN5lp-hiXWDw'
+    })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [httpInterceptorProviders],

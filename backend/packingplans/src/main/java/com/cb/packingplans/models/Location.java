@@ -22,9 +22,12 @@ public class Location {
     @NotBlank
     private String name;
     @NotBlank
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
     @NotBlank
-    private String coordinates;
+    private String latitude;
+    @NotBlank
+    private String longitude;
     @NotBlank
     private String country;
     @NotBlank
@@ -39,10 +42,11 @@ public class Location {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags = new HashSet<>();
 
-    public Location(String name, String description, String coordinates, String country, String imageUrl) {
+    public Location(String name, String description, String latitude, String longitude, String country, String imageUrl) {
         this.name = name;
         this.description = description;
-        this.coordinates = coordinates;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.country = country;
         this.imageUrl = imageUrl;
     }
