@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocationService {
@@ -29,5 +30,9 @@ public class LocationService {
 
     public Location findByName(String name) {
         return locationRepository.findByName(name);
+    }
+
+    public Optional<Location> getLocationById(Long id) {
+        return locationRepository.findById(id);
     }
 }

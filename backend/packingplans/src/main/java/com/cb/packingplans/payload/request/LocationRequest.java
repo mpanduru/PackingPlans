@@ -15,7 +15,9 @@ public class LocationRequest {
     @NotBlank
     private String description;
     @NotBlank
-    private String coordinates;
+    private String latitude;
+    @NotBlank
+    private String longitude;
     @NotBlank
     private String country;
     @NotBlank

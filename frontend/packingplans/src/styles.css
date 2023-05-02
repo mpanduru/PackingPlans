@@ -3,6 +3,18 @@
 /*@import "mdb-angular-ui-kit/assets/scss/mdb.scss";*/
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+  font-family: "Madera Regular";
+  src: url("assets/fonts/a3e629ef74f23205613f908b609d9b72.eot"); /* IE9*/
+  src: url("assets/fonts/a3e629ef74f23205613f908b609d9b72.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */ url("assets/fonts/a3e629ef74f23205613f908b609d9b72.woff2") format("woff2"), /* chrome、firefox */ url("assets/fonts/a3e629ef74f23205613f908b609d9b72.woff") format("woff"), /* chrome、firefox */ url("assets/fonts/a3e629ef74f23205613f908b609d9b72.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url("assets/fonts/a3e629ef74f23205613f908b609d9b72.svg#Madera Regular") format("svg"); /* iOS 4.1- */
+}
+
+@font-face {
+  font-family: "Madera W01 Bold";
+  src: url("assets/fonts/Madera_Bold/b9a86a749f6403ffcbf023ac838674c6.eot"); /* IE9*/
+  src: url("assets/fonts/Madera_Bold/b9a86a749f6403ffcbf023ac838674c6.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */ url("assets/fonts/Madera_Bold/b9a86a749f6403ffcbf023ac838674c6.woff2") format("woff2"), /* chrome、firefox */ url("assets/fonts/Madera_Bold/b9a86a749f6403ffcbf023ac838674c6.woff") format("woff"), /* chrome、firefox */ url("assets/fonts/Madera_Bold/b9a86a749f6403ffcbf023ac838674c6.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url("assets/fonts/Madera_Bold/b9a86a749f6403ffcbf023ac838674c6.svg#Madera W01 Bold") format("svg"); /* iOS 4.1- */
+}
+
 html, body {
   height: 100%;
   background-image: url("src/assets/images/background.jpg");

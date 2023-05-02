@@ -1,0 +1,47 @@
+.background-image {
+  background-size: cover;
+  background-position: center;
+  image-rendering: optimizeQuality;
+  image-rendering: pixelated;
+}
+
+.title {
+  margin-left: 6.4%;
+  margin-top: 10%;
+  font-weight: 400;
+  font-family: "Madera W01 Bold";
+  color: white;
+}
+
+.descripion {
+  margin-left: 5%;
+  font-size: x-large;
+  padding: 0;
+  max-width: 100%;
+  line-height: 1.5;
+  text-align: justify;
+  font-family: "Madera Regular";
+}
+
+.calendar {
+}
+
+.tags {
+  background-color: #6e6e6e; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 15px;
+  width: 5%;
+  margin-top: 10%;
+  margin-bottom: 3%;
+  margin-right: 1%;
+  font-family: "Madera Regular";
+}
+
+agm-map {
+  height: 300px;
+}
