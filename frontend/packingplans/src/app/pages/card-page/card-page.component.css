@@ -45,3 +45,17 @@
 agm-map {
   height: 300px;
 }
+
+.trip-button {
+  background-color: #222136; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 20px 20px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 15px;
+  line-height: 1.2;
+  float: right;
+  font-family: "Madera W01 Bold";
+}

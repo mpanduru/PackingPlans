@@ -28,7 +28,8 @@ import {CardPageComponent} from './pages/card-page/card-page.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {AgmCoreModule} from "@agm/core";
-import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import {DatePickerComponent} from './components/date-picker/date-picker.component';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -70,7 +71,7 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
     })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {
