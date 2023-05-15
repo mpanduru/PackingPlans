@@ -28,7 +28,9 @@ import {CardPageComponent} from './pages/card-page/card-page.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {AgmCoreModule} from "@agm/core";
-import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import {DatePickerComponent} from './components/date-picker/date-picker.component';
+import {CalendarPageComponent} from './pages/calendar-page/calendar-page.component';
+import {FullCalendarModule} from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
     LocationPageComponent,
     LocationTagComponent,
     CardPageComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    CalendarPageComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
     MatNativeDateModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBNqPlc0-a9AsgTOnR9GR7dN5lp-hiXWDw'
-    })
+    }),
+    FullCalendarModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [httpInterceptorProviders],
