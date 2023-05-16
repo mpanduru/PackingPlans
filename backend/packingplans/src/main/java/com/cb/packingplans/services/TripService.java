@@ -17,4 +17,9 @@ public class TripService {
         Trip newTrip = tripRepository.save(trip);
         return newTrip;
     }
+
+    public Trip getTrip(Long tripID) {
+        Trip searchedTrip = tripRepository.findTripById(tripID);
+        return searchedTrip;
+    }
 }
