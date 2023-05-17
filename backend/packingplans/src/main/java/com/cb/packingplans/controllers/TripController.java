@@ -43,8 +43,13 @@ public class TripController {
         if (user.isPresent()) {
             try {
                 Trip trip = TripConverter.convertTripRequestToTrip(tripRequest, locationService);
-                Trip newTrip = tripService.addTrip(trip, user.get());
-                return ResponseEntity.ok(TripConverter.convertTripToTripResponse(newTrip));
+                if (user.get().getTrips().stream().noneMatch(existingTrip ->
+                        trip.getStartDate().isBefore(existingTrip.getEndDate()) && trip.getEndDate().isAfter(existingTrip.getStartDate()))) {
+                    Trip newTrip = tripService.addTrip(trip, user.get());
+                    return ResponseEntity.ok(TripConverter.convertTripToTripResponse(newTrip));
+                } else {
+                    return ResponseEntity.badRequest().body(new MessageResponse("You can not create a trip in this interval!"));
+                }
             } catch (Exception e) {
                 ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
             }
