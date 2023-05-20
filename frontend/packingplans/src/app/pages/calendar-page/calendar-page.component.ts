@@ -11,32 +11,54 @@ import {FullCalendarComponent} from '@fullcalendar/angular';
 })
 export class CalendarPageComponent implements OnInit {
 
+  Events: any[] = [
+    {
+      "id": "1",
+      "title": "Vacation",
+      "start": "2023-05-01",
+      "end": "2023-05-10",
+      "display": "background",
+      "url": "https://google.com",
+      "textColor": "white"
+    },
+    {
+      "id": "2",
+      "title": "Vacation1",
+      "start": "2023-05-01",
+      "backgroundColor": "#222136"
+    },
+    {
+      "id": "3",
+      "title": "Vacation2",
+      "start": "2023-05-01",
+      "backgroundColor": "#222136"
+    },
+    {
+      "id": "4",
+      "title": "Vacation3",
+      "start": "2023-05-02",
+      "backgroundColor": "#222136"
+    }
+  ];
+
   calendarOptions?: CalendarOptions;
-  eventsModel: any;
   @ViewChild('fullcalendar') fullcalendar?: FullCalendarComponent;
 
   ngOnInit() {
-    // need for load calendar bundle first
     forwardRef(() => Calendar);
 
     this.calendarOptions = {
       plugins: [dayGridPlugin, interactionPlugin],
-      editable: true,
-      customButtons: {
-        myCustomButton: {
-          text: 'custom!',
-          click: function () {
-            alert('clicked the custom button!');
-          }
-        }
-      },
       headerToolbar: {
-        left: 'prev,next today myCustomButton',
+        left: 'prev,next',
         center: 'title',
-        right: 'dayGridMonth'
+        right: 'today'
       },
+      selectable: true,
+      events: this.Events,
+      dayMaxEvents: true,
       dateClick: this.handleDateClick.bind(this),
-      eventClick: this.handleEventClick.bind(this),
+      // eventClick: this.handleEventClick.bind(this),
       eventDragStop: this.handleEventDragStop.bind(this)
     };
   }
@@ -51,24 +73,5 @@ export class CalendarPageComponent implements OnInit {
 
   handleEventDragStop(arg: EventDragStopArg) {
     console.log(arg);
-  }
-
-  updateHeader() {
-    this.calendarOptions!.headerToolbar = {
-      left: 'prev,next myCustomButton',
-      center: 'title',
-      right: ''
-    };
-  }
-
-  updateEvents() {
-    const nowDate = new Date();
-    const yearMonth = nowDate.getUTCFullYear() + '-' + (nowDate.getUTCMonth() + 1);
-
-    this.calendarOptions!.events = [{
-      title: 'Updated Event',
-      start: yearMonth + '-08',
-      end: yearMonth + '-10'
-    }];
   }
 }

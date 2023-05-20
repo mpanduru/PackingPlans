@@ -42,3 +42,36 @@ body {
 .mat-mdc-button {
   color: #bebe58 !important;
 }
+
+.fc-col-header-cell-cushion {
+  color: #222136 !important;
+  text-decoration: none !important;
+  font-size: 1.1em;
+  font-family: "Madera W01 Bold";
+}
+
+.fc-daygrid-day-number {
+  color: #222136 !important;
+  text-decoration: none !important;
+  font-size: 1.1em;
+  font-family: "Madera Regular";
+}
+
+.fc .fc-toolbar-title {
+  color: #222136 !important;
+  text-decoration: none !important;
+  font-size: 2em;
+  font-family: "Madera W01 Bold";
+}
+
+.fc-scroller-liquid-absolute {
+  overflow: hidden !important;
+}
+
+.fc-bg-event {
+  background-color: #0073f7 !important;
+}
+
+.fc .fc-daygrid-day-bg .fc-bg-event {
+  color: white !important;
+}

@@ -1,12 +1,14 @@
-<div style="background-color: white !important;"></div>
-<button (click)="updateHeader()" id="updateHeader">Update header</button>
-<button (click)="updateEvents()" id="updateEvents">Update events</button>
-<full-calendar
-  *ngIf="calendarOptions"
-  #fullcalendar
-  [options]="calendarOptions"
->
-  <ng-template #eventContent let-arg>
-    <b>{{ arg.event.title }}</b> - {{ arg.event.start.getDate() }}
-  </ng-template>
-</full-calendar>
+<div>
+  .
+  <full-calendar class="fullcalendar"
+                 *ngIf="calendarOptions"
+                 #fullcalendar
+                 [options]="calendarOptions"
+  >
+    <ng-template #eventContent let-arg>
+      <b style="font-family: 'Madera Regular'">{{ arg.event.title }}</b>
+    </ng-template>
+  </full-calendar>
+</div>
+
+
