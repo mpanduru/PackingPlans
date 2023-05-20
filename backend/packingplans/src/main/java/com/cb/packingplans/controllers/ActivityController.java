@@ -32,22 +32,41 @@ public class ActivityController {
 
     @PostMapping("/new")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> addNewTrip(@RequestBody ActivityRequest activityRequest, @CookieValue("packingplanslogin") String jwtToken) {
-        // TODO verifications
-
+    public ResponseEntity<?> addNewActivity(@RequestBody ActivityRequest activityRequest, @CookieValue("packingplanslogin") String jwtToken) {
         String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isPresent()) {
             try {
                 Activity activity = ActivityConverter.convertActivityRequestToActivity(activityRequest, tripService);
                 if (activity.getTrip().getUsers().contains(user.get())) {
-                    Activity newActivity = activityService.addActivity(activity);
-                    return ResponseEntity.ok(ActivityConverter.convertActivityToActivityResponse(newActivity));
+                    if (activity.getTrip().getActivities().stream().noneMatch(existingActivity ->
+                            activity.getStartTime().equals(existingActivity.getStartTime()))) {
+                        Activity newActivity = activityService.addActivity(activity);
+                        return ResponseEntity.ok(ActivityConverter.convertActivityToActivityResponse(newActivity));
+                    }
+                    return ResponseEntity.badRequest().body(new MessageResponse("There are other activities already planned at this hour!"));
                 } else {
-                    return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not change other users trips or activities"));
+                    return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not change other user's trips or activities"));
                 }
             } catch (Exception e) {
                 ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+            }
+        }
+        return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+    }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> getActivityById(@PathVariable("id") Long id, @CookieValue("packingplanslogin") String jwtToken) {
+        String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
+        Optional<User> user = userRepository.findByUsername(username);
+
+        if (user.isPresent()) {
+            Activity activity = activityService.getActivityById(id);
+            if (activity.getTrip().getUsers().contains(user.get())) {
+                return ResponseEntity.ok().body(ActivityConverter.convertActivityToActivityResponse(activity));
+            } else {
+                return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not see other user's trips or activities"));
             }
         }
         return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
