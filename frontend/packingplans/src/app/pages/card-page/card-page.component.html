@@ -8,24 +8,31 @@
     </div>
   </div>
   <div class="row mt-5">
-    <div class="col-sm-8 descripion">&nbsp;&nbsp;
+    <div class="col-sm-8 description">&nbsp;&nbsp;
       {{location.description}}
+      <div>
+        <img
+          src="/assets/images/travel_image1.jpg"
+          style="max-width: 70%;">
+        <button (click)="newTrip()" class="trip-button">Plan trip<br>here!</button>
+      </div>
+
     </div>
     <div class="col-sm-2 ">
       <app-date-picker (selectedRangeValueChange)="onSelectedRangeChange($event)"
-                       [selectedRangeValue]="selectedDateRange"
-                       class="calendar"></app-date-picker>
-      <button (click)="newTrip()" class="trip-button">Plan Trip<br>Here!</button>
+                       [selectedRangeValue]="selectedDateRange">
+      </app-date-picker>
     </div>
   </div>
+  <div class="line"></div>
   <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-7 mt-5">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8 mt-5 mb-5">
       <agm-map [latitude]="Number(location.latitude)" [longitude]="Number(location.longitude)" [styles]="styles"
                [zoom]="10">
         <agm-marker [latitude]="Number(location.latitude)" [longitude]="Number(location.longitude)"></agm-marker>
       </agm-map>
     </div>
-    <div class="col-sm-4"></div>
+    <div class="col-sm-2"></div>
   </div>
 </div>
