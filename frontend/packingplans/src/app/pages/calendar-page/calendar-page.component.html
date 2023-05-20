@@ -6,7 +6,11 @@
                  [options]="calendarOptions"
   >
     <ng-template #eventContent let-arg>
-      <b style="font-family: 'Madera Regular'">{{ arg.event.title }}</b>
+      <b style="font-family: 'Madera Regular'">
+        <ng-container *ngIf="arg.event.extendedProps.startingHour">
+          {{ arg.event.extendedProps.startingHour }} -
+        </ng-container>
+        {{ arg.event.title }}</b>
     </ng-template>
   </full-calendar>
 </div>

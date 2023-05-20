@@ -1,8 +1,11 @@
 import {Component, forwardRef, OnInit, ViewChild} from '@angular/core';
 import {Calendar, CalendarOptions, EventClickArg} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin, {DateClickArg, EventDragStopArg} from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import {FullCalendarComponent} from '@fullcalendar/angular';
+import {MatDialog} from "@angular/material/dialog";
+import {DialogService} from "../../components/dialogService/dialog.service";
 
 @Component({
   selector: 'app-calendar-page',
@@ -24,54 +27,61 @@ export class CalendarPageComponent implements OnInit {
     {
       "id": "2",
       "title": "Vacation1",
-      "start": "2023-05-01",
-      "backgroundColor": "#222136"
+      "start": "2023-05-01"
     },
     {
       "id": "3",
       "title": "Vacation2",
-      "start": "2023-05-01",
-      "backgroundColor": "#222136"
+      "start": "2023-05-01"
     },
     {
       "id": "4",
       "title": "Vacation3",
       "start": "2023-05-02",
-      "backgroundColor": "#222136"
+      "startingHour": "10:00"
+    },
+    {
+      "id": "5",
+      "title": "Vacation4",
+      "start": "2023-05-02",
+      "startingHour": "09:00"
     }
   ];
 
   calendarOptions?: CalendarOptions;
   @ViewChild('fullcalendar') fullcalendar?: FullCalendarComponent;
 
+  constructor(private dialog: MatDialog, private dialogService: DialogService,) {
+  }
+
   ngOnInit() {
     forwardRef(() => Calendar);
 
     this.calendarOptions = {
-      plugins: [dayGridPlugin, interactionPlugin],
+      timeZone: 'UTC',
+      plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
       headerToolbar: {
         left: 'prev,next',
         center: 'title',
         right: 'today'
       },
-      selectable: true,
+      selectable: false,
       events: this.Events,
       dayMaxEvents: true,
-      dateClick: this.handleDateClick.bind(this),
-      // eventClick: this.handleEventClick.bind(this),
-      eventDragStop: this.handleEventDragStop.bind(this)
+      eventTimeFormat: {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      },
+      eventClick: this.handleEventClick.bind(this),
     };
   }
 
-  handleDateClick(arg: DateClickArg) {
-    console.log(arg);
-  }
-
   handleEventClick(arg: EventClickArg) {
-    console.log(arg);
-  }
-
-  handleEventDragStop(arg: EventDragStopArg) {
-    console.log(arg);
+    if (arg.event.end != null) {
+      console.log(arg);
+      this.dialogService.openLoginDialog();
+    }
   }
 }

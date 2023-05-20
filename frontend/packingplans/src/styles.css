@@ -75,3 +75,7 @@ body {
 .fc .fc-daygrid-day-bg .fc-bg-event {
   color: white !important;
 }
+
+.fc-daygrid-event {
+  background-color: #222136 !important;
+}
