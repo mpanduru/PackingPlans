@@ -33,6 +33,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {CalendarPageComponent} from './pages/calendar-page/calendar-page.component';
 import {FullCalendarModule} from '@fullcalendar/angular';
 import { TripActionsComponent } from './components/trip-actions/trip-actions.component';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { TripActionsComponent } from './components/trip-actions/trip-actions.com
     FullCalendarModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

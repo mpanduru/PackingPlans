@@ -12,17 +12,20 @@
       {{location.description}}
     </div>
     <div class="col-sm-2 ">
-      <app-date-picker [selectedRangeValue]="selectedDateRange" class="calendar"></app-date-picker>
+      <app-date-picker (selectedRangeValueChange)="onSelectedRangeChange($event)"
+                       [selectedRangeValue]="selectedDateRange"
+                       class="calendar"></app-date-picker>
+      <button (click)="newTrip()" class="trip-button">Plan Trip<br>Here!</button>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-6  ">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-7 mt-5">
       <agm-map [latitude]="Number(location.latitude)" [longitude]="Number(location.longitude)" [styles]="styles"
                [zoom]="10">
         <agm-marker [latitude]="Number(location.latitude)" [longitude]="Number(location.longitude)"></agm-marker>
       </agm-map>
     </div>
-    <div class="col-sm-3"></div>
+    <div class="col-sm-4"></div>
   </div>
 </div>
