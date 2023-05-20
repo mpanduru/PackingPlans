@@ -1,9 +1,12 @@
 package com.cb.packingplans.controllers;
 
+import com.cb.packingplans.converters.ActivityConverter;
 import com.cb.packingplans.converters.TripConverter;
+import com.cb.packingplans.models.Activity;
 import com.cb.packingplans.models.Trip;
 import com.cb.packingplans.models.User;
 import com.cb.packingplans.payload.request.TripRequest;
+import com.cb.packingplans.payload.response.ActivityResponse;
 import com.cb.packingplans.payload.response.MessageResponse;
 import com.cb.packingplans.payload.response.TripResponse;
 import com.cb.packingplans.repository.UserRepository;
@@ -47,8 +50,9 @@ public class TripController {
         if (user.isPresent()) {
             try {
                 Trip trip = TripConverter.convertTripRequestToTrip(tripRequest, locationService);
-                if (user.get().getTrips().stream().noneMatch(existingTrip ->
-                        trip.getStartDate().isBefore(existingTrip.getEndDate()) && trip.getEndDate().isAfter(existingTrip.getStartDate()))) {
+                if (user.get().getTrips().stream().allMatch(existingTrip ->
+                        trip.getStartDate().isAfter(existingTrip.getEndDate())
+                                || trip.getEndDate().isBefore(existingTrip.getStartDate()))) {
                     Trip newTrip = tripService.addTrip(trip, user.get());
                     return ResponseEntity.ok(TripConverter.convertTripToTripResponse(newTrip));
                 } else {
@@ -97,4 +101,30 @@ public class TripController {
         }
         return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
     }
+
+    @GetMapping("activities/{tripId}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> getActivitiesByTripId(@PathVariable("tripId") Long id, @CookieValue("packingplanslogin") String jwtToken) {
+        String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
+        Optional<User> user = userRepository.findByUsername(username);
+
+        if (user.isPresent()) {
+            Trip trip = tripService.getTrip(id);
+            if (trip.getUsers().contains(user.get())) {
+                Set<Activity> activities = tripService.getAllActivitiesByTripId(id);
+                List<ActivityResponse> activityResponseList = new ArrayList<>();
+                activities.forEach(a -> {
+                    activityResponseList.add(
+                            ActivityConverter.convertActivityToActivityResponse(a)
+                    );
+                });
+
+                return ResponseEntity.ok().body(activityResponseList);
+            } else {
+                return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not see other user's trips or activities"));
+            }
+        }
+        return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+    }
+
 }

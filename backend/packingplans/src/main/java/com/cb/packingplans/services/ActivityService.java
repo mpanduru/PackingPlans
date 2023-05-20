@@ -15,4 +15,8 @@ public class ActivityService {
         Activity newActivity = activityRepository.save(activity);
         return newActivity;
     }
+
+    public Activity getActivityById(Long id) {
+        return activityRepository.getActivityById(id);
+    }
 }

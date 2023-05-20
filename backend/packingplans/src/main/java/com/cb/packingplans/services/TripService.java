@@ -1,7 +1,9 @@
 package com.cb.packingplans.services;
 
+import com.cb.packingplans.models.Activity;
 import com.cb.packingplans.models.Trip;
 import com.cb.packingplans.models.User;
+import com.cb.packingplans.repository.ActivityRepository;
 import com.cb.packingplans.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ public class TripService {
 
     @Autowired
     private TripRepository tripRepository;
+    @Autowired
+    private ActivityRepository activityRepository;
 
     public Trip addTrip(Trip trip, User user) {
         trip.getUsers().add(user);
@@ -27,5 +31,9 @@ public class TripService {
 
     public Set<Trip> getAllTripsByUser(Long userId) {
         return tripRepository.findAllByUsers_Id(userId);
+    }
+
+    public Set<Activity> getAllActivitiesByTripId(Long id) {
+        return activityRepository.findActivitiesByTripId(id);
     }
 }
