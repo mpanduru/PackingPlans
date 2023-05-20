@@ -29,6 +29,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {AgmCoreModule} from "@agm/core";
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import {FooterComponent} from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
     LocationPageComponent,
     LocationTagComponent,
     CardPageComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
