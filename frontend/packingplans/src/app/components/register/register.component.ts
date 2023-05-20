@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   }
 
   moveToLogin() {
-    this.dialogService.closeRegisterDialog();
+    this.dialogService.closeDialog();
     this.dialogService.openLoginDialog();
   }
 

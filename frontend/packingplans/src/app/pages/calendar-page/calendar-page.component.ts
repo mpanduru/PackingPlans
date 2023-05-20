@@ -81,7 +81,7 @@ export class CalendarPageComponent implements OnInit {
   handleEventClick(arg: EventClickArg) {
     if (arg.event.end != null) {
       console.log(arg);
-      this.dialogService.openLoginDialog();
+      this.dialogService.openTripActionsDialog();
     }
   }
 }

@@ -31,6 +31,7 @@ import {AgmCoreModule} from "@agm/core";
 import {DatePickerComponent} from './components/date-picker/date-picker.component';
 import {CalendarPageComponent} from './pages/calendar-page/calendar-page.component';
 import {FullCalendarModule} from '@fullcalendar/angular';
+import { TripActionsComponent } from './components/trip-actions/trip-actions.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {FullCalendarModule} from '@fullcalendar/angular';
     LocationTagComponent,
     CardPageComponent,
     DatePickerComponent,
-    CalendarPageComponent
+    CalendarPageComponent,
+    TripActionsComponent
   ],
   imports: [
     BrowserModule,
