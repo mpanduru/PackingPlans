@@ -1,6 +1,7 @@
 package com.cb.packingplans.repository;
 
 import com.cb.packingplans.models.Trip;
+import com.cb.packingplans.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Set;

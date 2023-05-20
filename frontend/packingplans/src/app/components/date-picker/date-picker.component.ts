@@ -25,6 +25,5 @@ export class DatePickerComponent {
       }
     }
     this.selectedRangeValueChange.emit(this.selectedRangeValue);
-    console.log({range: this.selectedRangeValue});
   }
 }

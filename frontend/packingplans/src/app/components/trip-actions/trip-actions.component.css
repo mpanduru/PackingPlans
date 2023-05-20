@@ -1,0 +1,13 @@
+.mat-button {
+  margin-right: 2%;
+  margin-top: 3%;
+  float: right;
+  padding: 10px 10px 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.icon-display {
+  transform: scale(1.5);
+}
