@@ -10,4 +10,6 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
     Set<Trip> findAllByUsers_Id(Long userId);
 
     Set<User> findUsersById(Long tripId);
+
+    Trip findTripById(Long tripId);
 }
