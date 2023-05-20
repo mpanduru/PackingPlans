@@ -28,7 +28,8 @@ import {CardPageComponent} from './pages/card-page/card-page.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {AgmCoreModule} from "@agm/core";
-import {DatePickerComponent} from './components/date-picker/date-picker.component';
+import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import {FooterComponent} from './components/footer/footer.component';
 import {CalendarPageComponent} from './pages/calendar-page/calendar-page.component';
 import {FullCalendarModule} from '@fullcalendar/angular';
 import { TripActionsComponent } from './components/trip-actions/trip-actions.component';
@@ -46,6 +47,7 @@ import { TripActionsComponent } from './components/trip-actions/trip-actions.com
     LocationTagComponent,
     CardPageComponent,
     DatePickerComponent,
+    FooterComponent,
     CalendarPageComponent,
     TripActionsComponent
   ],
