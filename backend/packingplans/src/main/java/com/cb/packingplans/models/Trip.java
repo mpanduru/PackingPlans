@@ -30,12 +30,17 @@ public class Trip {
 
     @NotNull
     private LocalDate startDate;
+
     @NotNull
     private LocalDate endDate;
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
     private Location location;
+
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Activity> activities = new HashSet<>();
 
     public Trip(LocalDate startDate, LocalDate endDate, Location location) {
         this.startDate = startDate;

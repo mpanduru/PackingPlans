@@ -1,0 +1,18 @@
+<div>
+  .
+  <full-calendar class="fullcalendar"
+                 *ngIf="calendarOptions"
+                 #fullcalendar
+                 [options]="calendarOptions"
+  >
+    <ng-template #eventContent let-arg>
+      <b style="font-family: 'Madera Regular'">
+        <ng-container *ngIf="arg.event.extendedProps.startingHour">
+          {{ arg.event.extendedProps.startingHour }} -
+        </ng-container>
+        {{ arg.event.title }}</b>
+    </ng-template>
+  </full-calendar>
+</div>
+
+
