@@ -6,6 +6,8 @@ import com.cb.packingplans.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class TripService {
 
@@ -21,5 +23,9 @@ public class TripService {
     public Trip getTrip(Long tripID) {
         Trip searchedTrip = tripRepository.findTripById(tripID);
         return searchedTrip;
+    }
+
+    public Set<Trip> getAllTripsByUser(Long userId) {
+        return tripRepository.findAllByUsers_Id(userId);
     }
 }
