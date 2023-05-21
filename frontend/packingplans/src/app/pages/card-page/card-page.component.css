@@ -44,9 +44,13 @@
   font-family: "Madera Regular";
 }
 
+.travel-image {
+  max-width: 70%;
+  margin-left: 6%;
+}
+
 agm-map {
   height: 500px;
-  box-shadow: 2px 2px 20px rgb(34, 33, 54);
 }
 
 .line {
@@ -57,16 +61,22 @@ agm-map {
 
 
 .trip-button {
-  background-color: #222136;
+  background-color: #35318d;
   border: none;
   color: white;
-  padding: 20px 20px 20px 20px;
+  padding: 10px;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
   border-radius: 15px;
   line-height: 1.2;
-  margin: 3% 5% 0px 0px;
+  width: 133%;
+  height: 50px;
+  margin: 3% 33% 0px 0px;
   float: right;
   font-family: "Madera W01 Bold";
+}
+
+.trip-button:hover {
+  background-color: #8c8bcb;
 }
