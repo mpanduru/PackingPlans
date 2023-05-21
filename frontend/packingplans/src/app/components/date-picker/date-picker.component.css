@@ -1,4 +1,6 @@
 .demo-inline-calendar-card {
   width: 130%;
   margin-left: 10%;
+  display: inline-block;
+  background-color: #f1eff3;
 }
