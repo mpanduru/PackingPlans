@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Getter
@@ -20,6 +21,9 @@ public class ActivityRequest {
     @NotNull
     @JsonFormat(pattern = "HH:mm:ss.SSSD")
     private LocalTime startTime;
+    @NotNull
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate day;
     @NotNull
     private Long tripId;
 }

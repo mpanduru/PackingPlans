@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
@@ -31,14 +32,18 @@ public class Activity {
     private LocalTime startTime;
 
     @NotNull
+    private LocalDate day;
+
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trip_id")
     private Trip trip;
 
-    public Activity(Trip trip, String name, String description, LocalTime startTime) {
+    public Activity(Trip trip, String name, String description, LocalTime startTime, LocalDate day) {
         this.trip = trip;
         this.name = name;
         this.description = description;
         this.startTime = startTime;
+        this.day = day;
     }
 }

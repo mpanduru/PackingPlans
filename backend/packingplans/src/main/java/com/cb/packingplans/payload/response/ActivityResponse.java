@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Getter
@@ -16,5 +17,7 @@ public class ActivityResponse {
     private String description;
     @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate day;
     private Long tripId;
 }

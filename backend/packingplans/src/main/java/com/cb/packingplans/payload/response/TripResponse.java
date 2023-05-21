@@ -20,5 +20,5 @@ public class TripResponse {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
     private String location;
-    private List<String> activities;
+    private List<ActivityResponse> activities;
 }

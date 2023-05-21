@@ -6,6 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import {FullCalendarComponent} from '@fullcalendar/angular';
 import {MatDialog} from "@angular/material/dialog";
 import {DialogService} from "../../components/dialogService/dialog.service";
+import {TripService} from "../../services/tripService/trip.service";
 
 @Component({
   selector: 'app-calendar-page',
@@ -14,68 +15,41 @@ import {DialogService} from "../../components/dialogService/dialog.service";
 })
 export class CalendarPageComponent implements OnInit {
 
-  Events: any[] = [
-    {
-      "id": "1",
-      "title": "Vacation",
-      "start": "2023-05-01",
-      "end": "2023-05-10",
-      "display": "background",
-      "url": "https://google.com",
-      "textColor": "white"
-    },
-    {
-      "id": "2",
-      "title": "Vacation1",
-      "start": "2023-05-01"
-    },
-    {
-      "id": "3",
-      "title": "Vacation2",
-      "start": "2023-05-01"
-    },
-    {
-      "id": "4",
-      "title": "Vacation3",
-      "start": "2023-05-02",
-      "startingHour": "10:00"
-    },
-    {
-      "id": "5",
-      "title": "Vacation4",
-      "start": "2023-05-02",
-      "startingHour": "09:00"
-    }
-  ];
+  trips: any[] | undefined;
+
+  Events: any[] = [];
 
   calendarOptions?: CalendarOptions;
   @ViewChild('fullcalendar') fullcalendar?: FullCalendarComponent;
 
-  constructor(private dialog: MatDialog, private dialogService: DialogService,) {
+  constructor(private dialog: MatDialog, private dialogService: DialogService, private tripService: TripService) {
   }
 
   ngOnInit() {
     forwardRef(() => Calendar);
 
-    this.calendarOptions = {
-      timeZone: 'UTC',
-      plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
-      headerToolbar: {
-        left: 'prev,next',
-        center: 'title',
-        right: 'today'
+    this.tripService.getAllTrips().subscribe({
+      next: trips => {
+        this.trips = trips;
+        this.addTripsToCalendar();
+        console.log(this.Events);
+        this.calendarOptions = {
+          plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
+          headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'today'
+          },
+          selectable: false,
+          events: this.Events,
+          dayMaxEvents: true,
+          eventClick: this.handleEventClick.bind(this),
+        };
       },
-      selectable: false,
-      events: this.Events,
-      dayMaxEvents: true,
-      eventTimeFormat: {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      },
-      eventClick: this.handleEventClick.bind(this),
-    };
+      error: err => {
+        console.log(err);
+      }
+    })
   }
 
   handleEventClick(arg: EventClickArg) {
@@ -83,5 +57,26 @@ export class CalendarPageComponent implements OnInit {
       console.log(arg);
       this.dialogService.openTripActionsDialog();
     }
+  }
+
+  addTripsToCalendar() {
+    if (this.trips)
+      for (const trip of this.trips) {
+        let event = {
+          "title": trip.location,
+          "start": trip.startDate,
+          "end": trip.endDate,
+          "display": "background"
+        }
+        this.Events.push(event);
+        for (const a of trip.activities) {
+          let activity = {
+            "title": a.name,
+            "startingHour": a.startTime,
+            "start": a.day
+          }
+          this.Events.push(activity);
+        }
+      }
   }
 }

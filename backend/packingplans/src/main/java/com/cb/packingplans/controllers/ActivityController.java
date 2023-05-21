@@ -2,6 +2,7 @@ package com.cb.packingplans.controllers;
 
 import com.cb.packingplans.converters.ActivityConverter;
 import com.cb.packingplans.models.Activity;
+import com.cb.packingplans.models.Trip;
 import com.cb.packingplans.models.User;
 import com.cb.packingplans.payload.request.ActivityRequest;
 import com.cb.packingplans.payload.response.MessageResponse;
@@ -35,24 +36,34 @@ public class ActivityController {
     public ResponseEntity<?> addNewActivity(@RequestBody ActivityRequest activityRequest, @CookieValue("packingplanslogin") String jwtToken) {
         String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
         Optional<User> user = userRepository.findByUsername(username);
+
+        Trip trip = tripService.getTrip(activityRequest.getTripId());
         if (user.isPresent()) {
             try {
-                Activity activity = ActivityConverter.convertActivityRequestToActivity(activityRequest, tripService);
-                if (activity.getTrip().getUsers().contains(user.get())) {
-                    if (activity.getTrip().getActivities().stream().noneMatch(existingActivity ->
-                            activity.getStartTime().equals(existingActivity.getStartTime()))) {
-                        Activity newActivity = activityService.addActivity(activity);
-                        return ResponseEntity.ok(ActivityConverter.convertActivityToActivityResponse(newActivity));
-                    }
-                    return ResponseEntity.badRequest().body(new MessageResponse("There are other activities already planned at this hour!"));
+                if (activityRequest.getDay().isBefore(trip.getStartDate()) || activityRequest.getDay().isAfter(trip.getEndDate())) {
+                    return ResponseEntity.badRequest().body(new MessageResponse("Activity day should be in the trip date interval!"));
                 } else {
-                    return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not change other user's trips or activities"));
+                    Activity activity = ActivityConverter.convertActivityRequestToActivity(activityRequest, tripService);
+                    if (activity.getTrip().getUsers().contains(user.get())) {
+                        if (activity.getTrip().getActivities().stream().noneMatch(existingActivity ->
+                                isActivityTimeEqual(activity, existingActivity))) {
+                            Activity newActivity = activityService.addActivity(activity);
+                            return ResponseEntity.ok(ActivityConverter.convertActivityToActivityResponse(newActivity));
+                        }
+                        return ResponseEntity.badRequest().body(new MessageResponse("There are other activities already planned at this hour!"));
+                    } else {
+                        return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not change other user's trips or activities"));
+                    }
                 }
             } catch (Exception e) {
                 ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
             }
         }
         return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+    }
+
+    boolean isActivityTimeEqual(Activity activity1, Activity activity2) {
+        return activity1.getDay().equals(activity2.getDay()) && activity1.getStartTime().equals(activity2.getStartTime());
     }
 
     @GetMapping("/{id}")
