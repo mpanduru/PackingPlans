@@ -24,6 +24,8 @@ html, body {
   position: absolute;
   width: 100%;
   overflow-x: hidden;
+  left: 0px !important;
+  top: 0px !important;
 }
 
 body {
@@ -79,4 +81,8 @@ body {
 
 .fc-daygrid-event {
   background-color: #222136 !important;
+}
+
+.cdk-global-scrollblock {
+  overflow: hidden;
 }

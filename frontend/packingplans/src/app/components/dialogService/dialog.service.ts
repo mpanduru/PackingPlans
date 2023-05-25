@@ -26,11 +26,13 @@ export class DialogService {
     })
   }
 
-  public openTripActionsDialog(): void {
-    this.dialog.open(TripActionsComponent, {
-      width: '20%',
+  public openTripActionsDialog(trip: any): void {
+    let dialogRef = this.dialog.open(TripActionsComponent, {
+      width: '25%',
       height: '55%'
     });
+    let instance = dialogRef.componentInstance;
+    instance.trip = trip;
   }
 
   public closeDialog(): void {

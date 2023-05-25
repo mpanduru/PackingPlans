@@ -46,4 +46,11 @@ public class Activity {
         this.startTime = startTime;
         this.day = day;
     }
+
+    public void update(String name, String description, LocalTime startTime, LocalDate day) {
+        this.name = name;
+        this.description = description;
+        this.startTime = startTime;
+        this.day = day;
+    }
 }

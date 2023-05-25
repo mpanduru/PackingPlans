@@ -32,7 +32,6 @@ export class CalendarPageComponent implements OnInit {
       next: trips => {
         this.trips = trips;
         this.addTripsToCalendar();
-        console.log(this.Events);
         this.calendarOptions = {
           plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
           headerToolbar: {
@@ -49,13 +48,12 @@ export class CalendarPageComponent implements OnInit {
       error: err => {
         console.log(err);
       }
-    })
+    });
   }
 
   handleEventClick(arg: EventClickArg) {
     if (arg.event.end != null) {
-      console.log(arg);
-      this.dialogService.openTripActionsDialog();
+      this.dialogService.openTripActionsDialog(arg.event.extendedProps['trip']);
     }
   }
 
@@ -66,7 +64,8 @@ export class CalendarPageComponent implements OnInit {
           "title": trip.location,
           "start": trip.startDate,
           "end": trip.endDate,
-          "display": "background"
+          "display": "background",
+          "trip": trip
         }
         this.Events.push(event);
         for (const a of trip.activities) {

@@ -82,4 +82,38 @@ public class ActivityController {
         }
         return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
     }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> editActivity(@PathVariable("id") Long id, @RequestBody ActivityRequest activityRequest, @CookieValue("packingplanslogin") String jwtToken) {
+        String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
+        Optional<User> user = userRepository.findByUsername(username);
+
+        Trip trip = tripService.getTrip(activityRequest.getTripId());
+
+        if (user.isPresent()) {
+            try {
+                if (activityRequest.getDay().isBefore(trip.getStartDate()) || activityRequest.getDay().isAfter(trip.getEndDate())) {
+                    return ResponseEntity.badRequest().body(new MessageResponse("Activity day should be in the trip date interval!"));
+                } else {
+                    Activity activity = activityService.getActivityById(id);
+                    Activity editedActivity = ActivityConverter.convertActivityRequestToActivity(activityRequest, tripService);
+                    if (activity.getTrip().getUsers().contains(user.get())) {
+                        if (activity.getTrip().getActivities().stream().noneMatch(existingActivity ->
+                                isActivityTimeEqual(editedActivity, existingActivity))) {
+                            Activity newActivity = activityService.editActivity(activity, activityRequest);
+                            return ResponseEntity.ok(ActivityConverter.convertActivityToActivityResponse(newActivity));
+                        }
+                        return ResponseEntity.badRequest().body(new MessageResponse("There are other activities already planned at this hour!"));
+                    } else {
+                        return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not change other user's trips or activities"));
+                    }
+                }
+            } catch (Exception e) {
+                ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+            }
+        }
+        return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+    }
+
 }

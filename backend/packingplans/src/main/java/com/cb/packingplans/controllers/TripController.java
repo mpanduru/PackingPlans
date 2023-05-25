@@ -56,7 +56,7 @@ public class TripController {
                     Trip newTrip = tripService.addTrip(trip, user.get());
                     return ResponseEntity.ok(TripConverter.convertTripToTripResponse(newTrip));
                 } else {
-                    return ResponseEntity.badRequest().body(new MessageResponse("You can not create a trip in this interval!"));
+                    return ResponseEntity.badRequest().body(new MessageResponse("You already have a trip planned in this interval!"));
                 }
             } catch (Exception e) {
                 ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
@@ -79,7 +79,7 @@ public class TripController {
                         TripConverter.convertTripToTripResponse(t)
                 );
             });
-
+            //TODO sort activities before sending response
             return ResponseEntity.ok().body(tripResponseList);
         }
         return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
@@ -127,4 +127,57 @@ public class TripController {
         return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
     }
 
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> editTrip(@PathVariable("id") Long id, @RequestBody TripRequest tripRequest, @CookieValue("packingplanslogin") String jwtToken) {
+        if (tripRequest.getStartDate().isAfter(tripRequest.getEndDate())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Can not have start date after end date"));
+        }
+
+        String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
+        Optional<User> user = userRepository.findByUsername(username);
+
+        if (user.isPresent()) {
+            try {
+                Trip trip = tripService.getTrip(id);
+                if (trip.getUsers().contains(user.get())) {
+                    if (user.get().getTrips().stream().filter(t -> !t.getId().equals(trip.getId())).allMatch(existingTrip ->
+                            tripRequest.getStartDate().isAfter(existingTrip.getEndDate())
+                                    || tripRequest.getEndDate().isBefore(existingTrip.getStartDate()))) {
+                        Trip newTrip = tripService.updateTrip(trip, tripRequest);
+                        return ResponseEntity.ok(TripConverter.convertTripToTripResponse(newTrip));
+                    } else {
+                        return ResponseEntity.badRequest().body(new MessageResponse("You already have a trip planned in this interval!"));
+                    }
+                } else {
+                    return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not edit other user's trips or activities"));
+                }
+            } catch (Exception e) {
+                ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+            }
+        }
+        return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> deleteTrip(@PathVariable("id") Long id, @CookieValue("packingplanslogin") String jwtToken) {
+        String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
+        Optional<User> user = userRepository.findByUsername(username);
+
+        if (user.isPresent()) {
+            try {
+                Trip trip = tripService.getTrip(id);
+                if (trip.getUsers().contains(user.get())) {
+                    tripService.deleteTrip(id);
+                    return ResponseEntity.ok(new MessageResponse("Successfully deleted trip with id" + id));
+                } else {
+                    return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not delete other user's trips or activities"));
+                }
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+            }
+        }
+        return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+    }
 }

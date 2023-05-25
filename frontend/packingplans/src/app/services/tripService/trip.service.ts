@@ -23,4 +23,8 @@ export class TripService {
   getTripActivities(tripId: number): Observable<any> {
     return this.http.get(API_URL + 'activities/' + tripId);
   }
+
+  deleteTrip(tripId: number): Observable<any> {
+    return this.http.delete(API_URL + tripId);
+  }
 }
