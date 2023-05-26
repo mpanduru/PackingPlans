@@ -1,11 +1,11 @@
 package com.cb.packingplans.converters;
 
 import com.cb.packingplans.exceptions.LocationNotFoundException;
-import com.cb.packingplans.models.Activity;
 import com.cb.packingplans.models.Location;
 import com.cb.packingplans.models.Trip;
 import com.cb.packingplans.models.User;
 import com.cb.packingplans.payload.request.TripRequest;
+import com.cb.packingplans.payload.response.ActivityResponse;
 import com.cb.packingplans.payload.response.TripResponse;
 import com.cb.packingplans.services.LocationService;
 
@@ -26,8 +26,8 @@ public class TripConverter {
     public static TripResponse convertTripToTripResponse(Trip trip) {
         List<String> userNames = trip.getUsers().stream()
                 .map(User::getUsername).toList();
-        List<String> activityNames = trip.getActivities().stream()
-                .map(Activity::getName).toList();
-        return new TripResponse(trip.getId(), userNames, trip.getStartDate(), trip.getEndDate(), trip.getLocation().getName(), activityNames);
+        List<ActivityResponse> activities = trip.getActivities().stream()
+                .map(ActivityConverter::convertActivityToActivityResponse).toList();
+        return new TripResponse(trip.getId(), userNames, trip.getStartDate(), trip.getEndDate(), trip.getLocation().getName(), activities);
     }
 }

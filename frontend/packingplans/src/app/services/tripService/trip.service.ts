@@ -15,4 +15,16 @@ export class TripService {
   addTrip(startDate: string | null, endDate: string | null, locationName: string): Observable<any> {
     return this.http.post(API_URL + 'new', {startDate: startDate, endDate: endDate, locationName: locationName});
   }
+
+  getAllTrips(): Observable<any> {
+    return this.http.get(API_URL + 'all');
+  }
+
+  getTripActivities(tripId: number): Observable<any> {
+    return this.http.get(API_URL + 'activities/' + tripId);
+  }
+
+  deleteTrip(tripId: number): Observable<any> {
+    return this.http.delete(API_URL + tripId);
+  }
 }

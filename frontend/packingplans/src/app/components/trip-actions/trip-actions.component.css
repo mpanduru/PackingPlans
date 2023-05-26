@@ -1,5 +1,5 @@
 .mat-button {
-  margin-right: 2%;
+  margin-right: 8.1%;
   margin-top: 3%;
   float: right;
   padding: 10px 10px 15px 15px;
@@ -11,3 +11,38 @@
 .icon-display {
   transform: scale(1.5);
 }
+
+.img {
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trip-info-div {
+  margin-left: 3%;
+  display: inline;
+  line-height: 1.7;
+}
+
+.static-info {
+  display: inline;
+  padding: 0;
+  font-size: larger;
+  font-family: "Madera W01 Bold";
+}
+
+.dynamic-info {
+  display: inline;
+  padding: 0;
+  font-family: "Madera Regular";
+  font-size: larger;
+}
+
+.dynamic-info-date {
+  display: inline;
+  padding: 0;
+  font-family: "Madera Regular";
+  font-size: medium;
+}
+

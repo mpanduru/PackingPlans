@@ -13,12 +13,11 @@ public class ActivityConverter {
         if (trip == null) {
             throw new TripNotFoundException("This trip does not exist!");
         }
-        // to do verify if there is already a trip starting at this hour
-        Activity activity = new Activity(trip, activityRequest.getName(), activityRequest.getDescription(), activityRequest.getStartTime());
+        Activity activity = new Activity(trip, activityRequest.getName(), activityRequest.getDescription(), activityRequest.getStartTime(), activityRequest.getDay());
         return activity;
     }
 
     public static ActivityResponse convertActivityToActivityResponse(Activity activity) {
-        return new ActivityResponse(activity.getId(), activity.getName(), activity.getDescription(), activity.getStartTime(), activity.getTrip().getId());
+        return new ActivityResponse(activity.getId(), activity.getName(), activity.getDescription(), activity.getStartTime(), activity.getDay(), activity.getTrip().getId());
     }
 }

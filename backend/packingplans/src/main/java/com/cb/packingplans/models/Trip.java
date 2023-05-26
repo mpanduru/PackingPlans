@@ -47,4 +47,10 @@ public class Trip {
         this.endDate = endDate;
         this.location = location;
     }
+
+    public void update(LocalDate startDate, LocalDate endDate, Location location) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+    }
 }
