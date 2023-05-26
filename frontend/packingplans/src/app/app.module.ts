@@ -8,7 +8,7 @@ import {MatTableModule} from '@angular/material/table';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {RegisterComponent} from './components/register/register.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -28,12 +28,13 @@ import {CardPageComponent} from './pages/card-page/card-page.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {AgmCoreModule} from "@agm/core";
-import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import {DatePickerComponent} from './components/date-picker/date-picker.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {CalendarPageComponent} from './pages/calendar-page/calendar-page.component';
 import {FullCalendarModule} from '@fullcalendar/angular';
-import { TripActionsComponent } from './components/trip-actions/trip-actions.component';
+import {TripActionsComponent} from './components/trip-actions/trip-actions.component';
 import {DatePipe} from "@angular/common";
+import {TripPlanPageComponent} from './pages/trip-plan-page/trip-plan-page.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {DatePipe} from "@angular/common";
     DatePickerComponent,
     FooterComponent,
     CalendarPageComponent,
-    TripActionsComponent
+    TripActionsComponent,
+    TripPlanPageComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import {DatePipe} from "@angular/common";
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBNqPlc0-a9AsgTOnR9GR7dN5lp-hiXWDw'
     }),
-    FullCalendarModule
+    FullCalendarModule,
+    FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [httpInterceptorProviders, DatePipe],
