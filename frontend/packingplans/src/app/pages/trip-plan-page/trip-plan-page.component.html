@@ -2,8 +2,7 @@
   <div class="main row">
     <div class="col-sm-3">
       <app-date-picker (selectedRangeValueChange)="onSelectedRangeChange($event)"
-                       [selectedRangeValue]="selectedDateRange"
-                       class="calendar"></app-date-picker>
+                       [selectedRangeValue]="selectedDateRange"></app-date-picker>
     </div>
     <div class="col-sm-7 second">
       <div style="display: flex">
@@ -25,12 +24,30 @@
         <ul class="activities-list">
           <li *ngFor="let activity of activities">
             <span class="arrow">&#8594;</span>
-            &nbsp; {{ activity }}
+            &nbsp; {{ activity.name }}
+            <br>
+            <div class="description">{{activity.description}}</div>
           </li>
         </ul>
       </div>
 
-      <a (click)="addActivity()" class="button1">Button</a>
+      <div class="activity-adder">
+        <div class="row">
+          <div class="col">
+            <div class="new-activity">+ New activity</div>
+          </div>
+          <div class="col">
+            <a (click)="addActivity()" class="button2">Add</a>
+          </div>
+        </div>
+        <hr class="horizontal-line-2">
+        <input [(ngModel)]="newActivityName" placeholder="Activity name" class="title-input">
+        <textarea [(ngModel)]="newActivityDescription" placeholder="Activity details"
+                  class="description-input"></textarea>
+      </div>
+
+
+      <a class="button1">Done</a>
     </div>
   </div>
 </div>

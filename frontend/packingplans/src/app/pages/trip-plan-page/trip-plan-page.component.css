@@ -1,8 +1,8 @@
 .main {
   justify-content: center;
   align-items: center;
-  width: 80% !important;
-  margin: 8% 9% 9%;
+  width: 84% !important;
+  margin: 8% 8% 9%;
 }
 
 .second {
@@ -76,12 +76,20 @@ select {
 
 .activities-list {
   font-family: "Madera Regular";
-  height: 27vh;
+  height: 10vh;
   margin-top: 4%;
   list-style-type: none;
   font-size: large;
   font-weight: bold;
   overflow: auto;
+}
+
+.description {
+  font-family: "Madera Regular";
+  font-size: small;
+  font-weight: normal;
+  margin-left: 7.8%;
+  margin-top: 2%;
 }
 
 a.button1 {
@@ -111,4 +119,72 @@ a.button1:hover {
     display: block;
     margin: 0.4em auto;
   }
+}
+
+a.button2 {
+  padding: 0.35em 1.2em 0.6em;
+  background-color: #cfced2;
+  margin-top: 5%;
+  margin-bottom: -10%;
+  margin-right: 6%;
+  border-radius: 1em;
+  text-decoration: none;
+  font-family: "Madera Regular";
+  color: #6e6e6e;
+  text-align: center;
+  transition: all 0.2s;
+  float: right;
+  cursor: pointer;
+  font-size: small;
+}
+
+a.button2:hover {
+  color: #ffffff;
+  background-color: #4a4a4b;
+}
+
+.activity-adder {
+  margin-left: 2%;
+  background-color: #d7d5ea;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 2%;
+}
+
+.horizontal-line-2 {
+  border: none;
+  border-radius: 5px;
+  height: 3px;
+  background-color: #644646;
+  width: 94%;
+  margin-left: 3%;
+}
+
+.new-activity {
+  font-family: "Madera Regular";
+  font-size: x-large;
+  font-weight: bold;
+  padding-top: 0.8rem;
+  margin-left: 6%;
+}
+
+.title-input {
+  width: 40%;
+  border: none;
+  border-radius: 2px;
+  margin-left: 3%;
+  background-color: #f1eff3;
+  color: #222136;
+}
+
+.description-input {
+  width: 94%;
+  margin-top: 2%;
+  border: none;
+  border-radius: 2px;
+  margin-left: 3%;
+  background-color: #f1eff3;
+  color: #222136;
+  height: 5vh;
+  margin-bottom: 4%;
 }

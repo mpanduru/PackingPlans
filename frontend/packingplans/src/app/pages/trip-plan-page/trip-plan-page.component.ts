@@ -11,10 +11,17 @@ export class TripPlanPageComponent implements OnInit {
   selectedDateRange: DateRange<Date> | undefined;
   selectedDay: Date | null | undefined;
   days: Date[] | undefined;
-  activities: string[] = ['activity 1', 'activity 2', 'activity 3'];
+  activities: any[] = [];
+  hours: number[] = [];
+  newActivityName = '';
+  newActivityDescription = '';
+  newActivityHour = '';
   protected readonly Date = Date;
 
   constructor(public datePipe: DatePipe) {
+    for (let i = 0; i < 24; i++) {
+      this.hours.push(i);
+    }
   }
 
   ngOnInit() {
@@ -25,11 +32,17 @@ export class TripPlanPageComponent implements OnInit {
 
   onSelectedRangeChange(dateRange: DateRange<Date>) {
     this.selectedDateRange = dateRange;
+    this.enumerateDaysBetweenDates();
   }
 
   addActivity() {
-    const newActivity = 'New Activity';
-    this.activities.push(newActivity);
+    if (this.newActivityName != '') {
+      let activity = {
+        "name": this.newActivityName,
+        "description": this.newActivityDescription
+      }
+      this.activities.push(activity);
+    }
   }
 
   enumerateDaysBetweenDates() {
