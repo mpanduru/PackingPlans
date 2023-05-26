@@ -1,0 +1,57 @@
+<div>
+  <div class="main row">
+    <div class="col-sm-3">
+      <app-date-picker (selectedRangeValueChange)="onSelectedRangeChange($event)"
+                       [selectedRangeValue]="selectedDateRange"></app-date-picker>
+    </div>
+    <div class="col-sm-7 second">
+      <div style="display: flex">
+        <div class="day">{{datePipe.transform(selectedDay, 'EEEE')}}</div>
+        <div class="spacer"></div>
+        <div class="selector">
+          <div class="select">
+            <select [(ngModel)]="selectedDay" id="daySelect">
+              <option *ngFor="let day of days" [value]="day">
+                {{ day.getDate() }}/{{ day.getMonth() }}/{{ day.getFullYear() }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <hr class="horizontal-line">
+
+      <div>
+        <h2 class="activities-title">Activities</h2>
+        <ul class="activities-list">
+          <li *ngFor="let activity of activities">
+            <span class="arrow">&#8594;</span>
+            &nbsp; {{ activity.name }} ({{activity.startTime}})
+            <a class="mat-button" (click)="deleteActivity(activity)">
+              <mat-icon>delete</mat-icon>
+            </a>
+            <br>
+            <div class="description">{{activity.description}}</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="activity-adder">
+        <div class="row">
+          <div class="col">
+            <div class="new-activity">+ New activity</div>
+          </div>
+          <div class="col">
+            <a (click)="addActivity()" class="button2">Add</a>
+          </div>
+        </div>
+        <hr class="horizontal-line-2">
+        <input [(ngModel)]="newActivityName" placeholder="Activity name" class="title-input">
+        <input [(ngModel)]="newActivityHour" type="time" required class="hour-picker">
+        <textarea [(ngModel)]="newActivityDescription" placeholder="Activity details"
+                  class="description-input"></textarea>
+      </div>
+
+
+      <a class="button1">Done</a>
+    </div>
+  </div>
+</div>

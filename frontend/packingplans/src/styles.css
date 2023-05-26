@@ -17,7 +17,7 @@
 
 html, body {
   height: 100%;
-  background-image: url("src/assets/images/background.jpg");
+  background-color: white;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -85,4 +85,8 @@ body {
 
 .cdk-global-scrollblock {
   overflow: hidden;
+}
+ 
+.demo-inline-calendar-card {
+  box-shadow: 0 0 20px rgb(34, 33, 54);
 }
