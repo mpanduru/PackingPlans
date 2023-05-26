@@ -11,7 +11,13 @@ export class TripPlanPageComponent implements OnInit {
   selectedDateRange: DateRange<Date> | undefined;
   selectedDay: Date | null | undefined;
   days: Date[] | undefined;
-  activities: any[] = [];
+  activities: any[] = [
+    {
+      "name": "test1",
+      "description": "desc1",
+      "startTime": "11:11"
+    }
+  ];
   hours: number[] = [];
   newActivityName = '';
   newActivityDescription = '';
@@ -39,9 +45,14 @@ export class TripPlanPageComponent implements OnInit {
     if (this.newActivityName != '') {
       let activity = {
         "name": this.newActivityName,
-        "description": this.newActivityDescription
+        "description": this.newActivityDescription,
+        "startTime": this.newActivityHour
       }
       this.activities.push(activity);
+      this.sortActivities();
+      this.newActivityName = '';
+      this.newActivityDescription = '';
+      this.newActivityHour = '';
     }
   }
 
@@ -59,5 +70,26 @@ export class TripPlanPageComponent implements OnInit {
     }
 
     this.days = dates;
+  }
+
+  deleteActivity(activity: any) {
+    const index = this.activities.findIndex(a => a === activity);
+    if (index !== -1) {
+      this.activities.splice(index, 1);
+    }
+  }
+
+  sortActivities() {
+    this.activities.sort((a, b) => {
+      const [aHour, aMinute] = a.startTime.split(':').map(Number);
+      const [bHour, bMinute] = b.startTime.split(':').map(Number);
+
+      if (aHour !== bHour) {
+        return aHour - bHour; // Sort by hour
+      } else {
+        return aMinute - bMinute; // Sort by minute if hours are equal
+      }
+    });
+
   }
 }
