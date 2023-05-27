@@ -12,7 +12,7 @@ export class TripService {
   constructor(private http: HttpClient) {
   }
 
-  addTrip(startDate: string | null, endDate: string | null, locationName: string): Observable<any> {
+  addTrip(startDate: string | null, endDate: string | null, locationName: string | undefined): Observable<any> {
     return this.http.post(API_URL + 'new', {startDate: startDate, endDate: endDate, locationName: locationName});
   }
 

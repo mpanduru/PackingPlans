@@ -12,7 +12,11 @@ const routes: Routes = [
   {path: "locations", title: "PackingPlans - Locations", component: LocationPageComponent},
   {path: "calendar", title: "PackingPlans - Calendar", component: CalendarPageComponent},
   {path: "locations/:id", title: "PackingPlans - Location", component: CardPageComponent},
-  {path: "locations/:id/trip/plan", title: "Plan a trip", component: TripPlanPageComponent}
+  {
+    path: "locations/:locationName/trip/plan/:startDate/:endDate",
+    title: "Plan a trip",
+    component: TripPlanPageComponent
+  }
 ];
 
 @NgModule({

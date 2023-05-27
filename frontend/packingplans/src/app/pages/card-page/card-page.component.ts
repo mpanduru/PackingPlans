@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {LocationService} from "../../services/locationService/location.service";
 import {DateRange} from "@angular/material/datepicker";
 import {MapTypeStyle} from "@agm/core";
@@ -15,11 +15,12 @@ import {TripService} from "../../services/tripService/trip.service";
 export class CardPageComponent implements OnInit {
   id: number | undefined;
   location: any | undefined;
+  planButtonPressed = false;
   selectedDateRange: DateRange<Date> | undefined;
   styles: MapTypeStyle[] = <MapTypeStyle[]>MapStyleJson;
   protected readonly Number = Number;
 
-  constructor(private locationService: LocationService, private route: ActivatedRoute, private datepipe: DatePipe, private tripService: TripService) {
+  constructor(private locationService: LocationService, private route: ActivatedRoute, private datepipe: DatePipe, private tripService: TripService, private _router: Router) {
   }
 
   ngOnInit() {
@@ -39,18 +40,6 @@ export class CardPageComponent implements OnInit {
     }
   }
 
-  newTrip() {
-    if (this.selectedDateRange) {
-      this.tripService.addTrip(this.datepipe.transform(this.selectedDateRange.start, 'yyyy-MM-dd'),
-        this.datepipe.transform(this.selectedDateRange.end, 'yyyy-MM-dd'),
-        this.location.name).subscribe(
-        data => {
-          console.log(data);
-        }
-      )
-    }
-  }
-
   onSelectedRangeChange(dateRange: DateRange<Date>) {
     this.selectedDateRange = dateRange;
   }
@@ -58,5 +47,30 @@ export class CardPageComponent implements OnInit {
   logDate(): void {
     console.log(this.datepipe.transform(this.selectedDateRange?.start, 'yyyy-MM-dd'))
     console.log(this.datepipe.transform(this.selectedDateRange?.end, 'yyyy-MM-dd'))
+  }
+
+  getStartDate() {
+    if (this.selectedDateRange?.start) {
+      return this.selectedDateRange.start;
+    }
+    return 1;
+  }
+
+  getEndDate() {
+    if (this.selectedDateRange?.end) {
+      return this.selectedDateRange.end;
+    }
+    return 1;
+  }
+
+  isDatesValid() {
+    return this.getStartDate() != 1 && this.getEndDate() != 1;
+  }
+
+  getRouterLink() {
+    const startDate = this.getStartDate();
+    const endDate = this.getEndDate();
+
+    return `/locations/${this.location.name}/trip/plan/${startDate}/${endDate}`;
   }
 }
