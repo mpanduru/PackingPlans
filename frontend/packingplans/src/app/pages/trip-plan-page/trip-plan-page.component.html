@@ -23,13 +23,15 @@
         <h2 class="activities-title">Activities</h2>
         <ul class="activities-list">
           <li *ngFor="let activity of activities">
-            <span class="arrow">&#8594;</span>
-            &nbsp; {{ activity.name }} ({{activity.startTime}})
-            <a class="mat-button" (click)="deleteActivity(activity)">
-              <mat-icon>delete</mat-icon>
-            </a>
-            <br>
-            <div class="description">{{activity.description}}</div>
+            <ng-container *ngIf="activity.day == datePipe.transform(selectedDay, 'yyyy-MM-dd')">
+              <span class="arrow">&#8594;</span>
+              &nbsp; {{ activity.name }} ({{activity.startTime}})
+              <a class="mat-button" (click)="deleteActivity(activity)">
+                <mat-icon>delete</mat-icon>
+              </a>
+              <br>
+              <div class="description">{{activity.description}}</div>
+            </ng-container>
           </li>
         </ul>
       </div>
@@ -51,7 +53,7 @@
       </div>
 
 
-      <a class="button1">Done</a>
+      <a class="button1" (click)="addTrip()">Done</a>
     </div>
   </div>
 </div>

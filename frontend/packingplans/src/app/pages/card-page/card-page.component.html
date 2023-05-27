@@ -24,7 +24,15 @@
            class="travel-image">
     </div>
     <div class="col-sm-2">
-      <button (click)="newTrip()" class="trip-button">Plan trip here!</button>
+      <button
+        [routerLink]="isDatesValid() ? getRouterLink() : null"
+        (click)="planButtonPressed = true"
+        class="trip-button">
+        Plan trip here!
+      </button>
+      <div *ngIf="!isDatesValid() && planButtonPressed" class="row alert alert-danger error" role="alert">
+        Please Select both start and end data
+      </div>
     </div>
   </div>
   <div class="line"></div>

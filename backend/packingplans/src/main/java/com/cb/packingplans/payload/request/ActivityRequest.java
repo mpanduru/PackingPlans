@@ -19,7 +19,7 @@ public class ActivityRequest {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
     @NotNull
-    @JsonFormat(pattern = "HH:mm:ss.SSSD")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")

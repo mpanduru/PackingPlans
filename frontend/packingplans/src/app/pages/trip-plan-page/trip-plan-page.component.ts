@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {DateRange} from "@angular/material/datepicker";
 import {DatePipe} from "@angular/common";
+import {ActivatedRoute} from "@angular/router";
+import {LocationService} from "../../services/locationService/location.service";
+import {TripService} from "../../services/tripService/trip.service";
+import {ActivityService} from "../../services/activityService/activity.service";
 
 @Component({
   selector: 'app-trip-plan-page',
@@ -8,32 +12,34 @@ import {DatePipe} from "@angular/common";
   styleUrls: ['./trip-plan-page.component.css']
 })
 export class TripPlanPageComponent implements OnInit {
+  locationName: string | undefined;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
   selectedDateRange: DateRange<Date> | undefined;
   selectedDay: Date | null | undefined;
   days: Date[] | undefined;
-  activities: any[] = [
-    {
-      "name": "test1",
-      "description": "desc1",
-      "startTime": "11:11"
-    }
-  ];
+  activities: any[] = [];
   hours: number[] = [];
   newActivityName = '';
   newActivityDescription = '';
   newActivityHour = '';
   protected readonly Date = Date;
 
-  constructor(public datePipe: DatePipe) {
+  constructor(private locationService: LocationService, public datePipe: DatePipe, private route: ActivatedRoute, private tripService: TripService, private activityService: ActivityService) {
     for (let i = 0; i < 24; i++) {
       this.hours.push(i);
     }
   }
 
   ngOnInit() {
-    this.selectedDateRange = new DateRange(new Date('2023-05-17T00:00:00'), new Date('2023-05-19T00:00:00'))
+    this.route.params.subscribe(params => {
+      this.locationName = params['locationName'];
+      this.selectedDateRange = new DateRange<Date>(new Date(params['startDate']), new Date(params['endDate']));
+    });
+
     this.selectedDay = this.selectedDateRange?.start;
     this.enumerateDaysBetweenDates();
+    console.log(this.selectedDay);
   }
 
   onSelectedRangeChange(dateRange: DateRange<Date>) {
@@ -42,11 +48,12 @@ export class TripPlanPageComponent implements OnInit {
   }
 
   addActivity() {
-    if (this.newActivityName != '') {
+    if (this.newActivityName != '' && this.newActivityHour != '') {
       let activity = {
         "name": this.newActivityName,
         "description": this.newActivityDescription,
-        "startTime": this.newActivityHour
+        "startTime": this.newActivityHour,
+        "day": this.datePipe.transform(this.selectedDay, 'yyyy-MM-dd')
       }
       this.activities.push(activity);
       this.sortActivities();
@@ -90,6 +97,40 @@ export class TripPlanPageComponent implements OnInit {
         return aMinute - bMinute; // Sort by minute if hours are equal
       }
     });
+  }
 
+  addTrip() {
+    if (this.selectedDateRange) {
+      this.tripService.addTrip(this.datePipe.transform(this.selectedDateRange.start, 'yyyy-MM-dd'),
+        this.datePipe.transform(this.selectedDateRange.end, 'yyyy-MM-dd'),
+        this.locationName).subscribe(
+        data => {
+          console.log(data);
+          this.addAllActivities(data.id);
+        },
+        err => {
+          console.log(err);
+        }
+      )
+    }
+  }
+
+  addAllActivities(tripId: number) {
+    // @ts-ignore
+    let startDay = this.datePipe.transform(this.selectedDateRange.start, 'yyyy-MM-dd')
+    // @ts-ignore
+    let endDay = this.datePipe.transform(this.selectedDateRange.end, 'yyyy-MM-dd')
+    for (let activity of this.activities) {
+      // @ts-ignore
+      if (activity.day >= startDay && activity.day <= endDay)
+        this.activityService.addActivity(activity.name, activity.description, activity.startTime, activity.day, tripId).subscribe(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+    }
   }
 }
