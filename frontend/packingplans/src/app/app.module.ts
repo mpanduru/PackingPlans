@@ -37,6 +37,7 @@ import {DatePipe} from "@angular/common";
 import {TripPlanPageComponent} from './pages/trip-plan-page/trip-plan-page.component';
 import {ConfirmationDialogComponent} from './components/confirmation-dialog-component/confirmation-dialog.component';
 import { SpecificTripActivitiesComponent } from './components/specific-trip-activities/specific-trip-activities.component';
+import { LowerHomepageComponent } from './pages/lower-homepage/lower-homepage.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { SpecificTripActivitiesComponent } from './components/specific-trip-acti
     TripActionsComponent,
     TripPlanPageComponent,
     ConfirmationDialogComponent,
-    SpecificTripActivitiesComponent
+    SpecificTripActivitiesComponent,
+    LowerHomepageComponent
   ],
   imports: [
     BrowserModule,
