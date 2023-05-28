@@ -3,13 +3,28 @@ import {LoginComponent} from "../login/login.component";
 import {RegisterComponent} from "../register/register.component";
 import {MatDialog} from "@angular/material/dialog";
 import {TripActionsComponent} from "../trip-actions/trip-actions.component";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
 
+  private scrollToHomePage = new Subject<void>();
+  scrollToHomePage$ = this.scrollToHomePage.asObservable();
+
+  private scrollToNavbar = new Subject<void>();
+  scrollToNavbar$ = this.scrollToNavbar.asObservable();
+
   constructor(private dialog: MatDialog) {
+  }
+
+  triggerScrollToHowItWorks() {
+    this.scrollToHomePage.next();
+  }
+
+  triggerScrollToNavbar() {
+    this.scrollToNavbar.next();
   }
 
   public openLoginDialog(): void {
