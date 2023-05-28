@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {DateRange} from "@angular/material/datepicker";
 import {DatePipe} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {LocationService} from "../../services/locationService/location.service";
 import {TripService} from "../../services/tripService/trip.service";
 import {ActivityService} from "../../services/activityService/activity.service";
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-trip-plan-page',
@@ -25,7 +26,7 @@ export class TripPlanPageComponent implements OnInit {
   newActivityHour = '';
   protected readonly Date = Date;
 
-  constructor(private locationService: LocationService, public datePipe: DatePipe, private route: ActivatedRoute, private tripService: TripService, private activityService: ActivityService) {
+  constructor(private matSnackBar: MatSnackBar, private _router: Router, private locationService: LocationService, public datePipe: DatePipe, private route: ActivatedRoute, private tripService: TripService, private activityService: ActivityService) {
     for (let i = 0; i < 24; i++) {
       this.hours.push(i);
     }
@@ -107,6 +108,8 @@ export class TripPlanPageComponent implements OnInit {
         data => {
           console.log(data);
           this.addAllActivities(data.id);
+          this._router.navigate(['/calendar']);
+          this.showSuccessMessage('Your trip has been successfully created');
         },
         err => {
           console.log(err);
@@ -132,5 +135,13 @@ export class TripPlanPageComponent implements OnInit {
           }
         );
     }
+  }
+
+  showSuccessMessage(message: string) {
+
+    const config = new MatSnackBarConfig();
+    config.duration = 5000;
+    config.verticalPosition = "top";
+    this.matSnackBar.open(message, 'Close', config);
   }
 }

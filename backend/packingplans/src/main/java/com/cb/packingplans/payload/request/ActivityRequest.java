@@ -15,7 +15,6 @@ import java.time.LocalTime;
 public class ActivityRequest {
     @NotBlank
     private String name;
-    @NotBlank
     @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
     @NotNull

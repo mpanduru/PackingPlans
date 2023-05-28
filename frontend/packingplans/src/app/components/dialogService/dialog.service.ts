@@ -3,6 +3,7 @@ import {LoginComponent} from "../login/login.component";
 import {RegisterComponent} from "../register/register.component";
 import {MatDialog} from "@angular/material/dialog";
 import {TripActionsComponent} from "../trip-actions/trip-actions.component";
+import {SpecificTripActivitiesComponent} from "../specific-trip-activities/specific-trip-activities.component";
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,14 @@ export class DialogService {
 
   public closeDialog(): void {
     this.dialog.closeAll();
+  }
+
+  public openActivitiesDialog(activities: any[]): void {
+    this.dialog.open(SpecificTripActivitiesComponent, {
+      width: '30%',
+      height: '40%',
+      data: activities
+    });
   }
 
 }

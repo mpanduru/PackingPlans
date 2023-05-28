@@ -35,6 +35,8 @@ import {FullCalendarModule} from '@fullcalendar/angular';
 import {TripActionsComponent} from './components/trip-actions/trip-actions.component';
 import {DatePipe} from "@angular/common";
 import {TripPlanPageComponent} from './pages/trip-plan-page/trip-plan-page.component';
+import {ConfirmationDialogComponent} from './components/confirmation-dialog-component/confirmation-dialog.component';
+import { SpecificTripActivitiesComponent } from './components/specific-trip-activities/specific-trip-activities.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import {TripPlanPageComponent} from './pages/trip-plan-page/trip-plan-page.compo
     FooterComponent,
     CalendarPageComponent,
     TripActionsComponent,
-    TripPlanPageComponent
+    TripPlanPageComponent,
+    ConfirmationDialogComponent,
+    SpecificTripActivitiesComponent
   ],
   imports: [
     BrowserModule,

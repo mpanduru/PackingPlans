@@ -27,4 +27,12 @@ export class TripService {
   deleteTrip(tripId: number): Observable<any> {
     return this.http.delete(API_URL + tripId);
   }
+
+  editTrip(tripId: number, startDate: string | null, endDate: string | null, locationName: string | undefined): Observable<any> {
+    return this.http.put(API_URL + tripId, {
+      startDate: startDate,
+      endDate: endDate,
+      locationName: locationName
+    })
+  }
 }

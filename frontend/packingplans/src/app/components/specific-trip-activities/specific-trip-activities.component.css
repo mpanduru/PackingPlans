@@ -1,0 +1,30 @@
+.activities-list {
+  font-family: "Madera Regular";
+  height: 10vh;
+  margin-top: 4%;
+  list-style-type: none;
+  font-size: large;
+  font-weight: bold;
+  overflow: auto;
+}
+
+.description {
+  font-family: "Madera Regular";
+  font-size: small;
+  font-weight: normal;
+  margin-left: 7.8%;
+  margin-top: 2%;
+  max-width: 60%;
+}
+
+.mat-button {
+  float: right;
+  margin-top: 0.5%;
+  color: #222136;
+  margin-right: 2%;
+  cursor: pointer;
+}
+
+.mat-button:hover {
+  transform: scale(1.25) perspective(1px);
+}
