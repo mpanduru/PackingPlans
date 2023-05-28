@@ -19,4 +19,8 @@ export class LocationService {
   getLocationById(id: number): Observable<any> {
     return this.http.get(API_URL + id, {responseType: 'json'});
   }
+
+  getLocationByName(name: string): Observable<any> {
+    return this.http.get(API_URL + 'name/' + name, {responseType: 'json'});
+  }
 }

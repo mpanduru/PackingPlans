@@ -35,4 +35,8 @@ export class TripService {
       locationName: locationName
     })
   }
+
+  addUserToTrip(tripId: number, userId: number): Observable<any> {
+    return this.http.post(API_URL + tripId + '/user/' + userId, {});
+  }
 }

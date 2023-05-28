@@ -1,0 +1,15 @@
+<form>
+  <div class="text">
+    Select the user you want to add
+  </div>
+  <input style="margin-top: 10%; width: 70%; margin-left: 15%; margin-right: 15%" list="menace" name="menace"
+         [(ngModel)]="username">
+  <datalist style="margin-top: 10%; width: 70%; margin-left: 15%; margin-right: 15%" id="menace">
+    <option *ngFor="let user of users">{{user.username}} </option>
+  </datalist>
+  <div>
+    <a class="mat-button" (click)="onCheck(getUserId())">
+      <mat-icon [ngStyle]="{'color':'#222136'}" class="icon-display">check_circle</mat-icon>
+    </a>
+  </div>
+</form>

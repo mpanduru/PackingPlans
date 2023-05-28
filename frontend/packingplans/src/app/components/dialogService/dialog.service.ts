@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {TripActionsComponent} from "../trip-actions/trip-actions.component";
 import {SpecificTripActivitiesComponent} from "../specific-trip-activities/specific-trip-activities.component";
 import {Subject} from "rxjs";
+import {AddUserToTripComponent} from "../add-user-to-trip/add-user-to-trip.component";
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,14 @@ export class DialogService {
       width: '30%',
       height: '40%',
       data: activities
+    });
+  }
+
+  public openShareDialog(tripId: number): void {
+    this.dialog.open(AddUserToTripComponent, {
+      width: '15%',
+      height: '20%',
+      data: tripId
     });
   }
 

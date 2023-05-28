@@ -44,4 +44,8 @@ export class AuthService {
     return this.http.post(AUTH_API + 'signout', {}, httpOptions);
   }
 
+  getAllUsers(): Observable<any> {
+    return this.http.get(AUTH_API + 'users', {responseType: "json"})
+  }
+
 }
