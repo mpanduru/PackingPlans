@@ -1,6 +1,6 @@
 <form style="overflow: hidden">
   <div class="row img">
-    <img src="assets/images/paris_image.jpg" style="height: 100%; position: relative">
+    <img src="{{tripLocation.imageUrl}}" style="height: 100%; position: relative">
   </div>
   <div class="row trip-info-div">
 
@@ -67,7 +67,7 @@
       <a class="mat-button" mat-button (click)="onEdit()">
         <mat-icon [ngStyle]="{'color':'#222136'}" class="icon-display">edit</mat-icon>
       </a>
-      <a class="mat-button" mat-button>
+      <a class="mat-button" mat-button (click)="onShare()">
         <mat-icon [ngStyle]="{'color':'#222136'}" class="icon-display">share</mat-icon>
       </a>
       <a class="mat-button" mat-button (click)="onSeeActivitiesClick()">

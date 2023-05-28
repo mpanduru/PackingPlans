@@ -29,7 +29,15 @@ export class TripActionsComponent implements OnInit {
       error: error => {
         console.log(error);
       }
-    })
+    });
+    this.locationService.getLocationByName(this.trip.location).subscribe({
+      next: location => {
+        this.tripLocation = location;
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 
   onDeleteClick() {
@@ -88,5 +96,11 @@ export class TripActionsComponent implements OnInit {
         console.log(err);
       });
     this.editable = !this.editable;
+    this.dialogService.closeDialog();
+    this.dialogService.openTripActionsDialog(this.trip);
+  }
+
+  onShare() {
+    this.dialogService.openShareDialog();
   }
 }

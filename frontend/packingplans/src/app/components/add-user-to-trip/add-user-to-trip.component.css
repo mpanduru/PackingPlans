@@ -1,0 +1,20 @@
+.mat-button {
+  margin-right: 8.1%;
+  margin-top: 15%;
+  text-align: center;
+  text-decoration: none;
+  float: right;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.mat-button:hover {
+  transform: scale(1.25) perspective(1px);
+}
+
+.text {
+  font-family: "Madera Regular";
+  font-size: larger;
+  text-align: center;
+  margin-top: 5%;
+}
