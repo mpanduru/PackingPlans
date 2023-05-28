@@ -35,6 +35,8 @@ import {FullCalendarModule} from '@fullcalendar/angular';
 import {TripActionsComponent} from './components/trip-actions/trip-actions.component';
 import {DatePipe} from "@angular/common";
 import {TripPlanPageComponent} from './pages/trip-plan-page/trip-plan-page.component';
+import {ConfirmationDialogComponent} from './components/confirmation-dialog-component/confirmation-dialog.component';
+import { SpecificTripActivitiesComponent } from './components/specific-trip-activities/specific-trip-activities.component';
 import { LowerHomepageComponent } from './pages/lower-homepage/lower-homepage.component';
 
 @NgModule({
@@ -54,6 +56,8 @@ import { LowerHomepageComponent } from './pages/lower-homepage/lower-homepage.co
     CalendarPageComponent,
     TripActionsComponent,
     TripPlanPageComponent,
+    ConfirmationDialogComponent,
+    SpecificTripActivitiesComponent,
     LowerHomepageComponent
   ],
   imports: [

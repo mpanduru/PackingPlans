@@ -21,4 +21,14 @@ export class ActivityService {
       tripId: tripId
     });
   }
+
+  editActivity(id: number, name: string | undefined, description: string | null, startTime: Time | null, day: Date | null, tripId: number | null): Observable<any> {
+    return this.http.put(API_URL + id, {
+      name: name,
+      description: description,
+      startTime: startTime,
+      day: day,
+      tripId: tripId
+    })
+  }
 }

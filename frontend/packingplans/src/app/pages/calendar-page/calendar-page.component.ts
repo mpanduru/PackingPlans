@@ -39,6 +39,7 @@ export class CalendarPageComponent implements OnInit {
             center: 'title',
             right: 'today'
           },
+          eventOrder: ['startingHour', 'start', 'end'],
           selectable: false,
           events: this.Events,
           dayMaxEvents: true,
@@ -60,15 +61,19 @@ export class CalendarPageComponent implements OnInit {
   addTripsToCalendar() {
     if (this.trips)
       for (const trip of this.trips) {
+        const endDate = new Date(trip.endDate);
+        endDate.setDate(endDate.getDate() + 1);
+        const endDateString = endDate.toISOString().slice(0, 10);
         let event = {
           "title": trip.location,
           "start": trip.startDate,
-          "end": trip.endDate,
+          "end": endDateString,
           "display": "background",
           "trip": trip
         }
         this.Events.push(event);
         for (const a of trip.activities) {
+          console.log(a);
           let activity = {
             "title": a.name,
             "startingHour": a.startTime,

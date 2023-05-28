@@ -1,5 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TripService} from "../../services/tripService/trip.service";
+import {Location} from '@angular/common';
+import {ConfirmationDialogComponent} from "../confirmation-dialog-component/confirmation-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogService} from "../dialogService/dialog.service";
 
 @Component({
   selector: 'app-trip-actions',
@@ -8,8 +12,10 @@ import {TripService} from "../../services/tripService/trip.service";
 })
 export class TripActionsComponent implements OnInit {
   @Input() trip: any | undefined;
+  editable = false;
+  beforeEditTrip: any;
 
-  constructor(private tripService: TripService) {
+  constructor(private tripService: TripService, private location: Location, private dialog: MatDialog, public dialogService: DialogService) {
   }
 
   ngOnInit() {
@@ -17,15 +23,60 @@ export class TripActionsComponent implements OnInit {
   }
 
   onDeleteClick() {
-    console.log(this.trip.id);
-    this.tripService.deleteTrip(this.trip.id).subscribe({
-        next: response => {
-          console.log(response);
-        },
-        error: err => {
-          console.log(err);
-        }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'Are you sure you want to delete this action?',
+      width: '400px',
+      height: '150px'
+    });
+
+    dialogRef.componentInstance?.dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.tripService.deleteTrip(this.trip.id).subscribe({
+            next: response => {
+              console.log(response);
+              window.location.reload();
+            },
+            error: err => {
+              console.log(err);
+            }
+          }
+        );
       }
-    );
+    });
+  }
+
+  onSeeActivitiesClick() {
+    this.tripService.getTripActivities(this.trip.id).subscribe(
+      data => {
+        this.dialogService.openActivitiesDialog(data);
+      }, err => {
+        console.log(err);
+      }
+    )
+  }
+
+  onEdit() {
+    this.beforeEditTrip = Object.assign({}, this.trip);
+    this.editable = !this.editable;
+  }
+
+  cancelEdit() {
+    console.log(this.beforeEditTrip);
+    console.log(this.trip);
+    this.trip.location = this.beforeEditTrip.location;
+    this.trip.startDate = this.beforeEditTrip.startDate;
+    this.trip.endDate = this.beforeEditTrip.endDate;
+    console.log(this.trip);
+    this.editable = !this.editable;
+  }
+
+  checkEdit() {
+    this.tripService.editTrip(this.trip.id, this.trip.startDate, this.trip.endDate, this.trip.location).subscribe(
+      data => {
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    this.editable = !this.editable;
   }
 }

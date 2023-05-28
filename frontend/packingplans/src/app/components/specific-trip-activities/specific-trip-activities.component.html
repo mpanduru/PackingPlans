@@ -1,0 +1,30 @@
+<ul class="activities-list">
+  <li *ngFor="let activity of activities">
+    <ng-container *ngIf="!activity.isEditMode; else editMode">
+      <span class="arrow">&#8594;</span>
+      {{ activity.name }} ({{activity.day}} - {{activity.startTime}})
+      <a class="mat-button" (click)="toggleIsEditable(activity)">
+        <mat-icon>edit</mat-icon>
+      </a>
+      <a class="mat-button">
+        <mat-icon>delete</mat-icon>
+      </a>
+      <br>
+      <div class="description">{{activity.description}}</div>
+    </ng-container>
+    <ng-template #editMode>
+      <div style="width: 100%"><input style="width: 30%" type="text" [(ngModel)]="activity.name"/>
+        (
+        <input style="width: 25%" type="text" [(ngModel)]="activity.day"> -
+        <input style="width: 13%" type="text" [(ngModel)]="activity.startTime">)
+        <a class="mat-button" (click)="editActivity(activity)">
+          <mat-icon>check_circle</mat-icon>
+        </a>
+        <a class="mat-button" (click)="exitEditActivity(activity)">
+          <mat-icon>cancel</mat-icon>
+        </a>
+      </div>
+      <textarea style="width: 70%" [(ngModel)]="activity.description"></textarea>
+    </ng-template>
+  </li>
+</ul>

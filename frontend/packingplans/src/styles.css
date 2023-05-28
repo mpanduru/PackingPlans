@@ -73,6 +73,7 @@ body {
 
 .fc-bg-event {
   background-color: #0073f7 !important;
+  cursor: pointer !important;
 }
 
 .fc .fc-daygrid-day-bg .fc-bg-event {
@@ -86,7 +87,7 @@ body {
 .cdk-global-scrollblock {
   overflow: hidden;
 }
- 
+
 .demo-inline-calendar-card {
   box-shadow: 0 0 20px rgb(34, 33, 54);
 }

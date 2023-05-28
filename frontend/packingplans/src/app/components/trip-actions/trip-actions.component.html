@@ -3,39 +3,71 @@
     <img src="assets/images/paris_image.jpg" style="height: 100%; position: relative">
   </div>
   <div class="row trip-info-div">
-    <div>
-      <span class="static-info">Trip to:</span>
-      <span class="dynamic-info">&nbsp; {{trip.location}}</span>
-    </div>
-    <div>
-      <span class="static-info">Start Date:</span>
-      <span class="dynamic-info-date">&nbsp; {{trip.startDate}}</span>
-    </div>
-    <div>
-      <span class="static-info">End Date:</span>
-      <span class="dynamic-info-date">&nbsp; {{trip.endDate}}</span>
-    </div>
-    <div>
-      <span class="static-info">Participants:</span>
-      <span class="dynamic-info">&nbsp; {{trip.users[0]}}&nbsp;
+
+    <ng-container *ngIf="!editable; else editMode">
+      <div>
+        <span class="static-info">Trip to:</span>
+        <span class="dynamic-info">&nbsp; {{trip.location}}</span>
+      </div>
+      <div>
+        <span class="static-info">Start Date:</span>
+        <span class="dynamic-info-date">&nbsp; {{trip.startDate}}</span>
+      </div>
+      <div>
+        <span class="static-info">End Date:</span>
+        <span class="dynamic-info-date">&nbsp; {{trip.endDate}}</span>
+      </div>
+      <div>
+        <span class="static-info">Participants:</span>
+        <span class="dynamic-info">&nbsp; {{trip.users[0]}}&nbsp;
         <div style="display: inline; color: blue; text-decoration: underline; cursor: pointer;"
              *ngIf="trip.users.length != 1">
           +{{trip.users.length - 1}}&nbsp;more
         </div></span>
-    </div>
+      </div>
+    </ng-container>
+    <ng-template #editMode>
+      <div>
+        <span class="static-info">Trip to:</span>
+        <input class="editablefield" type="text" [(ngModel)]="trip.location" [ngModelOptions]="{standalone: true}">
+        <a class="edit-mat-button" (click)="checkEdit()">
+          <mat-icon>check_circle</mat-icon>
+        </a>
+        <a class="edit-mat-button" (click)="cancelEdit()">
+          <mat-icon>cancel</mat-icon>
+        </a>
+      </div>
+      <div>
+        <span class="static-info">Start Date:</span>
+        <input class="editablefield-date" type="text" [(ngModel)]="trip.startDate"
+               [ngModelOptions]="{standalone: true}">
+      </div>
+      <div>
+        <span class="static-info">End Date:</span>
+        <input class="editablefield-date" type="text" [(ngModel)]="trip.endDate" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div>
+        <span class="static-info">Participants:</span>
+        <span class="dynamic-info">&nbsp; {{trip.users[0]}}&nbsp;
+                <div style="display: inline; color: blue; text-decoration: underline; cursor: pointer;"
+                     *ngIf="trip.users.length != 1">
+                  +{{trip.users.length - 1}}&nbsp;more
+                </div></span>
+      </div>
+    </ng-template>
   </div>
   <div class="row ">
     <div class="col">
       <a class="mat-button" mat-button (click)="onDeleteClick()">
         <mat-icon [ngStyle]="{'color':'#222136'}" class="icon-display">delete</mat-icon>
       </a>
-      <a class="mat-button" mat-button>
+      <a class="mat-button" mat-button (click)="onEdit()">
         <mat-icon [ngStyle]="{'color':'#222136'}" class="icon-display">edit</mat-icon>
       </a>
       <a class="mat-button" mat-button>
         <mat-icon [ngStyle]="{'color':'#222136'}" class="icon-display">share</mat-icon>
       </a>
-      <a class="mat-button" mat-button>
+      <a class="mat-button" mat-button (click)="onSeeActivitiesClick()">
         <mat-icon [ngStyle]="{'color':'#222136'}" class="icon-display">remove_red_eye</mat-icon>
       </a>
     </div>

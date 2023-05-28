@@ -15,7 +15,7 @@ public class ActivityResponse {
     private Long id;
     private String name;
     private String description;
-    @JsonFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime startTime;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate day;

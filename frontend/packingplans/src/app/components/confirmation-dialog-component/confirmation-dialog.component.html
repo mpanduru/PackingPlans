@@ -1,0 +1,5 @@
+<mat-dialog-content style="font-family: 'Madera Regular'; text-align: center">{{ message }}</mat-dialog-content>
+<mat-dialog-actions style="display: flex; justify-content: center; font-family: 'Madera Regular'">
+  <button mat-button mat-dialog-close style="color: #222136">Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="color: #222136;">Delete</button>
+</mat-dialog-actions>
