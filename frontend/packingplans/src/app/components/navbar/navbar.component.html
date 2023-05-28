@@ -7,7 +7,7 @@
     <a (click)="scrollToHowItWorks()"
        class="mat-button" mat-button style="font-family: 'Madera Regular'">How It Works
     </a>
-    <a class="mat-button" mat-button routerLink="/calendar" style="font-family: 'Madera Regular'">Calendar</a>
+    <a class="mat-button" mat-button routerLink="/calendar" *ngIf="isLoggedIn" style="font-family: 'Madera Regular'">Calendar</a>
     <span class="spacer"></span>
     <a (click)="openLoginDialog()" *ngIf="!isLoggedIn" class="mat-button" mat-button
        style="font-family: 'Madera Regular'">

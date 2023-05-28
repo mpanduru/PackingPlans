@@ -71,3 +71,11 @@
 .edit-mat-button:hover {
   transform: scale(1.25) perspective(1px);
 }
+
+.select {
+  background-image: none;
+  /*padding: 0 .5em;*/
+  cursor: pointer;
+  font-size: larger;
+  font-family: "Madera Regular"
+}

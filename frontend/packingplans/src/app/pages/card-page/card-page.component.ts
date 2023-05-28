@@ -6,6 +6,7 @@ import {MapTypeStyle} from "@agm/core";
 import MapStyleJson from "../../../assets/styles/mapstyle.json"
 import {DatePipe} from "@angular/common";
 import {TripService} from "../../services/tripService/trip.service";
+import {StorageService} from "../../services/storageService/storage.service";
 
 @Component({
   selector: 'app-card-page',
@@ -14,16 +15,18 @@ import {TripService} from "../../services/tripService/trip.service";
 })
 export class CardPageComponent implements OnInit {
   id: number | undefined;
+  isLoggedIn = false;
   location: any | undefined;
   planButtonPressed = false;
   selectedDateRange: DateRange<Date> | undefined;
   styles: MapTypeStyle[] = <MapTypeStyle[]>MapStyleJson;
   protected readonly Number = Number;
 
-  constructor(private locationService: LocationService, private route: ActivatedRoute, private datepipe: DatePipe, private tripService: TripService, private _router: Router) {
+  constructor(private locationService: LocationService, private route: ActivatedRoute, private datepipe: DatePipe, private tripService: TripService, private _router: Router, private storageService: StorageService) {
   }
 
   ngOnInit() {
+    this.isLoggedIn = this.storageService.isLoggedIn();
     this.route.params.subscribe(params => {
       this.id = +params['id'];
     });

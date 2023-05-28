@@ -14,11 +14,9 @@ import {TripService} from "../../services/tripService/trip.service";
   styleUrls: ['./calendar-page.component.css']
 })
 export class CalendarPageComponent implements OnInit {
-
+  locations: any[] | undefined;
   trips: any[] | undefined;
-
   Events: any[] = [];
-
   calendarOptions?: CalendarOptions;
   @ViewChild('fullcalendar') fullcalendar?: FullCalendarComponent;
 
@@ -27,7 +25,6 @@ export class CalendarPageComponent implements OnInit {
 
   ngOnInit() {
     forwardRef(() => Calendar);
-
     this.tripService.getAllTrips().subscribe({
       next: trips => {
         this.trips = trips;
