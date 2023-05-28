@@ -4,6 +4,7 @@ import {Location} from '@angular/common';
 import {ConfirmationDialogComponent} from "../confirmation-dialog-component/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogService} from "../dialogService/dialog.service";
+import {LocationService} from "../../services/locationService/location.service";
 
 @Component({
   selector: 'app-trip-actions',
@@ -12,14 +13,23 @@ import {DialogService} from "../dialogService/dialog.service";
 })
 export class TripActionsComponent implements OnInit {
   @Input() trip: any | undefined;
+  tripLocation: any;
   editable = false;
   beforeEditTrip: any;
+  locations: any[] = [];
 
-  constructor(private tripService: TripService, private location: Location, private dialog: MatDialog, public dialogService: DialogService) {
+  constructor(private tripService: TripService, private location: Location, private dialog: MatDialog, public dialogService: DialogService, private locationService: LocationService) {
   }
 
   ngOnInit() {
-    console.log(this.trip);
+    this.locationService.getAllLocations().subscribe({
+      next: locations => {
+        this.locations = locations;
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
   }
 
   onDeleteClick() {

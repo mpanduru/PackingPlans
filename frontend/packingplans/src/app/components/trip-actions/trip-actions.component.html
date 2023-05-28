@@ -29,7 +29,10 @@
     <ng-template #editMode>
       <div>
         <span class="static-info">Trip to:</span>
-        <input class="editablefield" type="text" [(ngModel)]="trip.location" [ngModelOptions]="{standalone: true}">
+        <select [(ngModel)]="trip.location" [ngModelOptions]="{standalone: true}" class="select">
+          <option *ngFor="let location of locations">
+            {{location.name}}</option>
+        </select>
         <a class="edit-mat-button" (click)="checkEdit()">
           <mat-icon>check_circle</mat-icon>
         </a>
