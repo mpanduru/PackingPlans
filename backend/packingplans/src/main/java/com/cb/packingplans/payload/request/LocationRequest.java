@@ -22,5 +22,7 @@ public class LocationRequest {
     private String country;
     @NotBlank
     private String imageUrl;
+    @NotBlank
+    private String coverImageUrl;
     private Set<String> tagNames;
 }

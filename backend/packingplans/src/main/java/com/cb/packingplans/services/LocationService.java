@@ -35,4 +35,8 @@ public class LocationService {
     public Optional<Location> getLocationById(Long id) {
         return locationRepository.findById(id);
     }
+
+    public Location getLocationByName(String name) {
+        return locationRepository.findByName(name);
+    }
 }
