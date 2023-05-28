@@ -1,20 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 import {DialogService} from "../dialogService/dialog.service";
 import {AuthService} from "../../services/authService/auth.service";
 import {UserService} from "../../services/userService/user.service";
 import {StorageService} from "../../services/storageService/storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
 
   isLoggedIn = false;
   username?: string;
 
-  constructor(private dialogService: DialogService, private authService: AuthService, private userService: UserService, private storageService: StorageService) {
+  constructor(private dialogService: DialogService, private authService: AuthService, private userService: UserService, private storageService: StorageService, private router: Router, private elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
@@ -24,6 +25,22 @@ export class NavbarComponent implements OnInit {
       const user = this.storageService.getUser();
       this.username = user.username;
     }
+  }
+
+  ngAfterViewInit() {
+    this.dialogService.scrollToNavbar$.subscribe(() => {
+      this.scrollToNavbar();
+    })
+  }
+
+  scrollToHowItWorks() {
+    this.router.navigate(['/home']);
+    this.dialogService.triggerScrollToHowItWorks();
+  }
+
+  public scrollToNavbar() {
+    const element = this.elementRef.nativeElement.querySelector('#navbar');
+    element.scrollIntoView({behavior: 'smooth'});
   }
 
   openLoginDialog(): void {
