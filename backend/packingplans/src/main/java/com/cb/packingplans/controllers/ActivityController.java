@@ -116,4 +116,28 @@ public class ActivityController {
         return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
     }
 
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> deleteActivity(@PathVariable("id") Long id, @CookieValue("packingplanslogin") String jwtToken) {
+        String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
+        Optional<User> user = userRepository.findByUsername(username);
+
+        if (user.isPresent()) {
+            try {
+                Activity activity = activityService.getActivityById(id);
+                Trip trip = tripService.getTrip(activity.getTrip().getId());
+                if (trip.getUsers().contains(user.get())) {
+                    activityService.deleteActivity(id);
+                    return ResponseEntity.ok(new MessageResponse("Successfully deleted activity with id" + id));
+                } else {
+                    return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not delete other user's activities"));
+                }
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+            }
+        }
+        return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+    }
+
+
 }

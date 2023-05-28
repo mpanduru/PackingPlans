@@ -25,4 +25,8 @@ public class ActivityService {
         activity.update(activityRequest.getName(), activityRequest.getDescription(), activityRequest.getStartTime(), activityRequest.getDay());
         return activityRepository.save(activity);
     }
+
+    public void deleteActivity(Long id) {
+        activityRepository.deleteById(id);
+    }
 }

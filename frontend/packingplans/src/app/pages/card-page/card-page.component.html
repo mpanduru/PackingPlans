@@ -1,5 +1,5 @@
 <div style="background-color: white">
-  <div [ngStyle]="{ 'background-image': 'url(' + location.imageUrl + ')'}" class="row background-image">
+  <div [ngStyle]="{ 'background-image': 'url(' + location.coverImageUrl + ')'}" class="row background-image">
     <p class="display-3 title">{{location.name}}</p>
     <div style="margin-left: 6.4%">
       <button *ngFor="let tag of location.tagNames" class="tags" disabled>

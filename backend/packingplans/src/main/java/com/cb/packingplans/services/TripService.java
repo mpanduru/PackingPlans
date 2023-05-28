@@ -51,4 +51,12 @@ public class TripService {
     public void deleteTrip(Long tripId) {
         tripRepository.deleteById(tripId);
     }
+
+    public void removeUser(Long tripId, Long userId) {
+        tripRepository.removeUserFromTrip(tripId, userId);
+    }
+
+    public void addUserToTrip(Long tripId, Long userId) {
+        tripRepository.addUserToTrip(tripId, userId);
+    }
 }

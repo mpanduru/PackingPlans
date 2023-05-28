@@ -168,12 +168,41 @@ public class TripController {
         if (user.isPresent()) {
             try {
                 Trip trip = tripService.getTrip(id);
+                int usersSize = trip.getUsers().size();
                 if (trip.getUsers().contains(user.get())) {
-                    tripService.deleteTrip(id);
+                    if (usersSize == 1) {
+                        tripService.deleteTrip(id);
+                    } else if (usersSize > 1) {
+                        tripService.removeUser(trip.getId(), user.get().getId());
+                    }
                     return ResponseEntity.ok(new MessageResponse("Successfully deleted trip with id" + id));
                 } else {
                     return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not delete other user's trips or activities"));
                 }
+
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+            }
+        }
+        return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+    }
+
+    @PostMapping("/{tripId}/user/{userId}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> addUserToTrip(@PathVariable("tripId") Long tripId, @PathVariable("userId") Long userId, @CookieValue("packingplanslogin") String jwtToken) {
+        String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
+        Optional<User> user = userRepository.findByUsername(username);
+
+        if (user.isPresent()) {
+            try {
+                Trip trip = tripService.getTrip(tripId);
+                if (trip.getUsers().contains(user.get())) {
+                    tripService.addUserToTrip(trip.getId(), userId);
+                    return ResponseEntity.ok(new MessageResponse("User successfully added to trip with id" + tripId));
+                } else {
+                    return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not change other user's trips or activities"));
+                }
+
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
             }

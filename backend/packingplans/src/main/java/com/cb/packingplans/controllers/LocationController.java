@@ -58,4 +58,14 @@ public class LocationController {
             return ResponseEntity.ok(LocationConverter.convertLocationToLocationResponse(location.get()));
         return ResponseEntity.badRequest().body(new MessageResponse("Location not found!"));
     }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<?> getLocationByName(@PathVariable("name") String name) {
+        try {
+            Location location = locationService.getLocationByName(name);
+            return ResponseEntity.ok(LocationConverter.convertLocationToLocationResponse(location));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
