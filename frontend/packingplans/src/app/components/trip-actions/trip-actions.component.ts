@@ -101,6 +101,6 @@ export class TripActionsComponent implements OnInit {
   }
 
   onShare() {
-    this.dialogService.openShareDialog();
+    this.dialogService.openShareDialog(this.trip.id);
   }
 }

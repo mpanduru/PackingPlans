@@ -64,10 +64,11 @@ export class DialogService {
     });
   }
 
-  public openShareDialog(): void {
+  public openShareDialog(tripId: number): void {
     this.dialog.open(AddUserToTripComponent, {
       width: '15%',
-      height: '20%'
+      height: '20%',
+      data: tripId
     });
   }
 
