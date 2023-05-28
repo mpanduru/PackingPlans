@@ -35,6 +35,7 @@ import {FullCalendarModule} from '@fullcalendar/angular';
 import {TripActionsComponent} from './components/trip-actions/trip-actions.component';
 import {DatePipe} from "@angular/common";
 import {TripPlanPageComponent} from './pages/trip-plan-page/trip-plan-page.component';
+import { LowerHomepageComponent } from './pages/lower-homepage/lower-homepage.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {TripPlanPageComponent} from './pages/trip-plan-page/trip-plan-page.compo
     FooterComponent,
     CalendarPageComponent,
     TripActionsComponent,
-    TripPlanPageComponent
+    TripPlanPageComponent,
+    LowerHomepageComponent
   ],
   imports: [
     BrowserModule,
