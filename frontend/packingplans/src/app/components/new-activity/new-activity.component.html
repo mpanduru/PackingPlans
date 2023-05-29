@@ -1,0 +1,24 @@
+<div style="overflow: hidden">
+  <div class="activity-adder">
+    <div class="row">
+      <div class="col">
+        <div class="new-activity">+ New activity</div>
+      </div>
+      <div class="col">
+        <a class="button2" (click)="onAdd()">Add</a>
+      </div>
+    </div>
+    <hr class="horizontal-line-2">
+    <input placeholder="Activity name" class="title-input" [(ngModel)]="activityName">
+    <div class="hour-div">Activity hour: <input type="time" required class="hour-picker"
+                                                [(ngModel)]="activityStartTime">
+      Activity day:
+      <select class="selector" [(ngModel)]="activityDay">
+        <option *ngFor="let day of days" [value]="day">
+          {{ day.getDate() }}/{{ day.getMonth() }}/{{ day.getFullYear() }}</option>
+      </select>
+    </div>
+    <textarea placeholder="Activity details"
+              class="description-input" [(ngModel)]="activityDescription"></textarea>
+  </div>
+</div>

@@ -1,3 +1,9 @@
+<div class="mb-3">
+  <a class="new-activity-button" (click)="onNewActivity()">
+    <mat-icon>add_circle</mat-icon>
+  </a>
+  <br>
+</div>
 <ul class="activities-list">
   <li *ngFor="let activity of activities">
     <ng-container *ngIf="!activity.isEditMode; else editMode">

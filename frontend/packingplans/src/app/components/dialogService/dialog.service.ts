@@ -6,6 +6,8 @@ import {TripActionsComponent} from "../trip-actions/trip-actions.component";
 import {SpecificTripActivitiesComponent} from "../specific-trip-activities/specific-trip-activities.component";
 import {Subject} from "rxjs";
 import {AddUserToTripComponent} from "../add-user-to-trip/add-user-to-trip.component";
+import {AllUsersComponent} from "../all-users/all-users.component";
+import {NewActivityComponent} from "../new-activity/new-activity.component";
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +70,22 @@ export class DialogService {
     this.dialog.open(AddUserToTripComponent, {
       width: '15%',
       height: '20%',
+      data: tripId
+    });
+  }
+
+  public openAllUsersDialog(users: any[]): void {
+    this.dialog.open(AllUsersComponent, {
+      width: '30%',
+      height: '20%',
+      data: users
+    });
+  }
+
+  public openNewActivityDialog(tripId: number) {
+    this.dialog.open(NewActivityComponent, {
+      width: '33%',
+      height: '27%',
       data: tripId
     });
   }
