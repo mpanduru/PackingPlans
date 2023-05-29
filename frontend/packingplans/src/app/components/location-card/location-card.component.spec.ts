@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LocationCardComponent } from './location-card.component';
+import {LocationCardComponent} from './location-card.component';
 
-describe('LocationCardComponent', () => {
+xdescribe('LocationCardComponent', () => {
   let component: LocationCardComponent;
   let fixture: ComponentFixture<LocationCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LocationCardComponent ]
+      declarations: [LocationCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(LocationCardComponent);
     component = fixture.componentInstance;

@@ -9,6 +9,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 export class AllUsersComponent {
   constructor(
     public dialogRef: MatDialogRef<AllUsersComponent>,
-    @Inject(MAT_DIALOG_DATA) public users: any[]) {
+    @Inject(MAT_DIALOG_DATA) public users: string[]) {
   }
 }
