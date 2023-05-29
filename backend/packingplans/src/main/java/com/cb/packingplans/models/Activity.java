@@ -24,7 +24,6 @@ public class Activity {
     @NotBlank
     private String name;
 
-    @NotBlank
     @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
 

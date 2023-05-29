@@ -52,8 +52,19 @@ export class SpecificTripActivitiesComponent implements OnInit {
     activity.startTime = this.beforeEditActivity.startTime;
     activity.isEditMode = false;
   }
-
+  
+  deleteActivity(activity: any) {
+    this.activityService.deleteActivity(activity.id).subscribe(data => {
+        console.log(data);
+        window.location.reload();
+      }, err => {
+        console.log(err);
+      }
+    )
+  }
+  
   onNewActivity() {
     this.dialogService.openNewActivityDialog(this.activities[0].tripId);
   }
+  
 }

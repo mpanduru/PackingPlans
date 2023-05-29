@@ -26,6 +26,7 @@ import java.util.Set;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/rest/trips")
+@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 public class TripController {
 
     @Autowired
@@ -38,7 +39,6 @@ public class TripController {
     private LocationService locationService;
 
     @PostMapping("/new")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> addNewTrip(@RequestBody TripRequest tripRequest, @CookieValue("packingplanslogin") String jwtToken) {
         if (tripRequest.getStartDate().isAfter(tripRequest.getEndDate())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Can not have start date after end date"));
@@ -66,7 +66,6 @@ public class TripController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> getAllUserTrips(@CookieValue("packingplanslogin") String jwtToken) {
         String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
         Optional<User> user = userRepository.findByUsername(username);
@@ -79,14 +78,12 @@ public class TripController {
                         TripConverter.convertTripToTripResponse(t)
                 );
             });
-            //TODO sort activities before sending response
             return ResponseEntity.ok().body(tripResponseList);
         }
         return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> getTripById(@PathVariable("id") Long id, @CookieValue("packingplanslogin") String jwtToken) {
         String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
         Optional<User> user = userRepository.findByUsername(username);
@@ -128,85 +125,76 @@ public class TripController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> editTrip(@PathVariable("id") Long id, @RequestBody TripRequest tripRequest, @CookieValue("packingplanslogin") String jwtToken) {
+    public ResponseEntity<?> editTrip(@PathVariable("id") Long tripId, @RequestBody TripRequest tripRequest, @CookieValue("packingplanslogin") String jwtToken) {
         if (tripRequest.getStartDate().isAfter(tripRequest.getEndDate())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Can not have start date after end date"));
         }
 
-        String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
-        Optional<User> user = userRepository.findByUsername(username);
-
-        if (user.isPresent()) {
-            try {
-                Trip trip = tripService.getTrip(id);
-                if (trip.getUsers().contains(user.get())) {
-                    if (user.get().getTrips().stream().filter(t -> !t.getId().equals(trip.getId())).allMatch(existingTrip ->
-                            tripRequest.getStartDate().isAfter(existingTrip.getEndDate())
-                                    || tripRequest.getEndDate().isBefore(existingTrip.getStartDate()))) {
-                        Trip newTrip = tripService.updateTrip(trip, tripRequest);
-                        return ResponseEntity.ok(TripConverter.convertTripToTripResponse(newTrip));
-                    } else {
-                        return ResponseEntity.badRequest().body(new MessageResponse("You already have a trip planned in this interval!"));
-                    }
+        return handleRequest((user, id) -> {
+            Trip trip = tripService.getTrip(id);
+            if (trip.getUsers().contains(user)) {
+                if (user.getTrips().stream().filter(t -> !t.getId().equals(trip.getId())).allMatch(existingTrip ->
+                        tripRequest.getStartDate().isAfter(existingTrip.getEndDate())
+                                || tripRequest.getEndDate().isBefore(existingTrip.getStartDate()))) {
+                    Trip newTrip = tripService.updateTrip(trip, tripRequest);
+                    return ResponseEntity.ok(TripConverter.convertTripToTripResponse(newTrip));
                 } else {
-                    return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not edit other user's trips or activities"));
+                    return ResponseEntity.badRequest().body(new MessageResponse("You already have a trip planned in this interval!"));
                 }
-            } catch (Exception e) {
-                ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+            } else {
+                return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not edit other user's trips or activities"));
             }
-        }
-        return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+        }, tripId, jwtToken);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<?> deleteTrip(@PathVariable("id") Long id, @CookieValue("packingplanslogin") String jwtToken) {
-        String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
-        Optional<User> user = userRepository.findByUsername(username);
-
-        if (user.isPresent()) {
-            try {
-                Trip trip = tripService.getTrip(id);
-                int usersSize = trip.getUsers().size();
-                if (trip.getUsers().contains(user.get())) {
-                    if (usersSize == 1) {
-                        tripService.deleteTrip(id);
-                    } else if (usersSize > 1) {
-                        tripService.removeUser(trip.getId(), user.get().getId());
-                    }
-                    return ResponseEntity.ok(new MessageResponse("Successfully deleted trip with id" + id));
-                } else {
-                    return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not delete other user's trips or activities"));
+    public ResponseEntity<?> deleteTrip(@PathVariable("id") Long tripId, @CookieValue("packingplanslogin") String jwtToken) {
+        return handleRequest((user, id) -> {
+            Trip trip = tripService.getTrip(id);
+            int usersSize = trip.getUsers().size();
+            if (trip.getUsers().contains(user)) {
+                if (usersSize == 1) {
+                    tripService.deleteTrip(id);
+                } else if (usersSize > 1) {
+                    tripService.removeUser(trip.getId(), user.getId());
                 }
-
-            } catch (Exception e) {
-                return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+                return ResponseEntity.ok(new MessageResponse("Successfully deleted trip with id" + id));
+            } else {
+                return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not delete other user's trips or activities"));
             }
-        }
-        return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+        }, tripId, jwtToken);
     }
 
     @PostMapping("/{tripId}/user/{userId}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> addUserToTrip(@PathVariable("tripId") Long tripId, @PathVariable("userId") Long userId, @CookieValue("packingplanslogin") String jwtToken) {
+        return handleRequest((user, id) -> {
+            Trip trip = tripService.getTrip(id);
+            if (trip.getUsers().contains(user)) {
+                tripService.addUserToTrip(trip.getId(), userId);
+                return ResponseEntity.ok(new MessageResponse("User successfully added to trip with id" + id));
+            } else {
+                return ResponseEntity.badRequest().body(new MessageResponse("Error! You cannot change other user's trips or activities"));
+            }
+        }, tripId, jwtToken);
+    }
+
+    private ResponseEntity<?> handleRequest(RunnableWithParams runnable, Long tripId, String jwtToken) {
         String username = jwtUtils.getUserNameFromJwtToken(jwtToken);
         Optional<User> user = userRepository.findByUsername(username);
 
         if (user.isPresent()) {
             try {
-                Trip trip = tripService.getTrip(tripId);
-                if (trip.getUsers().contains(user.get())) {
-                    tripService.addUserToTrip(trip.getId(), userId);
-                    return ResponseEntity.ok(new MessageResponse("User successfully added to trip with id" + tripId));
-                } else {
-                    return ResponseEntity.badRequest().body(new MessageResponse("Error! You can not change other user's trips or activities"));
-                }
-
+                return runnable.run(user.get(), tripId);
             } catch (Exception e) {
                 return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
             }
+        } else {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
         }
-        return ResponseEntity.badRequest().body(new MessageResponse("Error! Could not retrieve user data"));
+    }
+
+    @FunctionalInterface
+    interface RunnableWithParams {
+        ResponseEntity<?> run(User user, Long tripId) throws Exception;
     }
 }

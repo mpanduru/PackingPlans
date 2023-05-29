@@ -1,3 +1,5 @@
+<h2 *ngIf="!activities.length" style="font-family: 'Madera W01 Bold'; text-align: center">There are no activities to
+  display!</h2>
 <div class="mb-3">
   <a class="new-activity-button" (click)="onNewActivity()">
     <mat-icon>add_circle</mat-icon>
@@ -12,7 +14,7 @@
       <a class="mat-button" (click)="toggleIsEditable(activity)">
         <mat-icon>edit</mat-icon>
       </a>
-      <a class="mat-button">
+      <a class="mat-button" (click)="deleteActivity(activity)">
         <mat-icon>delete</mat-icon>
       </a>
       <br>
