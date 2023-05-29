@@ -106,13 +106,7 @@ export class TripActionsComponent implements OnInit {
   }
 
   onAllUsers() {
-    this.authService.getAllUsers().subscribe({
-      next: data => {
-        this.dialogService.openAllUsersDialog(data);
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
+    console.log(this.trip.users);
+    this.dialogService.openAllUsersDialog(this.trip.users);
   }
 }

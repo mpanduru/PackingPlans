@@ -32,7 +32,7 @@ export class AddUserToTripComponent implements OnInit {
     this.tripService.addUserToTrip(this.tripId, userId).subscribe({
       next: data => {
         console.log(data);
-        this.dialogService.closeDialog();
+        window.location.reload();
       },
       error: err => {
         console.log(err);
