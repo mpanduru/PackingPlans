@@ -1,0 +1,78 @@
+.activity-adder {
+  margin-left: 2%;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 2%;
+}
+
+.horizontal-line-2 {
+  border: none;
+  border-radius: 5px;
+  height: 3px;
+  background-color: #222136;
+  width: 94%;
+  margin-left: 3%;
+}
+
+.new-activity {
+  font-family: "Madera Regular";
+  font-size: x-large;
+  font-weight: bold;
+  padding-top: 0.8rem;
+  margin-left: 6%;
+}
+
+.title-input {
+  width: 94%;
+  margin-left: 3%;
+  color: #222136;
+}
+
+.hour-picker {
+  margin-left: 2%;
+  margin-top: 2%;
+}
+
+.hour-div {
+  margin-left: 3%;
+  font-family: "Madera Regular";
+  font-weight: bold;
+  font-size: medium;
+}
+
+.description-input {
+  width: 94%;
+  margin-top: 2%;
+  border-radius: 2px;
+  margin-left: 3%;
+  color: #222136;
+  height: 8vh;
+  margin-bottom: 4%;
+}
+
+a.button2 {
+  padding: 0.35em 1.2em 0.6em;
+  margin-top: 5%;
+  margin-bottom: -10%;
+  margin-right: 6%;
+  border-radius: 1em;
+  text-decoration: none;
+  font-family: "Madera Regular";
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  transition: all 0.2s;
+  float: right;
+  cursor: pointer;
+  font-size: small;
+  background-color: #222136;
+}
+
+a.button2:hover {
+  color: #222136;
+  background-color: #969696;
+}
+
+.selector {
+  margin-left: 2%;
+}

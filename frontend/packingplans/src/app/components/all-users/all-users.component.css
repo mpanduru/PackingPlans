@@ -1,0 +1,10 @@
+.activities-list {
+  font-family: "Madera Regular";
+  height: 75%;
+  margin-top: 4%;
+  list-style-type: none;
+  font-size: large;
+  font-weight: bold;
+  overflow: auto;
+  text-align: center;
+}

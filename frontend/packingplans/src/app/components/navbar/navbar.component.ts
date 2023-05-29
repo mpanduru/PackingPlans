@@ -52,7 +52,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       next: res => {
         console.log(res);
         this.storageService.clean();
-
         window.location.reload();
       },
       error: err => {

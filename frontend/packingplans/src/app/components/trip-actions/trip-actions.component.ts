@@ -5,6 +5,7 @@ import {ConfirmationDialogComponent} from "../confirmation-dialog-component/conf
 import {MatDialog} from "@angular/material/dialog";
 import {DialogService} from "../dialogService/dialog.service";
 import {LocationService} from "../../services/locationService/location.service";
+import {AuthService} from "../../services/authService/auth.service";
 
 @Component({
   selector: 'app-trip-actions',
@@ -18,7 +19,7 @@ export class TripActionsComponent implements OnInit {
   beforeEditTrip: any;
   locations: any[] = [];
 
-  constructor(private tripService: TripService, private location: Location, private dialog: MatDialog, public dialogService: DialogService, private locationService: LocationService) {
+  constructor(private authService: AuthService, private tripService: TripService, private location: Location, private dialog: MatDialog, public dialogService: DialogService, private locationService: LocationService) {
   }
 
   ngOnInit() {
@@ -102,5 +103,16 @@ export class TripActionsComponent implements OnInit {
 
   onShare() {
     this.dialogService.openShareDialog(this.trip.id);
+  }
+
+  onAllUsers() {
+    this.authService.getAllUsers().subscribe({
+      next: data => {
+        this.dialogService.openAllUsersDialog(data);
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 }

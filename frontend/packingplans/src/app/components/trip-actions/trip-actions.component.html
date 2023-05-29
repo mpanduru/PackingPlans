@@ -21,6 +21,7 @@
         <span class="static-info">Participants:</span>
         <span class="dynamic-info">&nbsp; {{trip.users[0]}}&nbsp;
         <div style="display: inline; color: blue; text-decoration: underline; cursor: pointer;"
+             (click)="onAllUsers()"
              *ngIf="trip.users.length != 1">
           +{{trip.users.length - 1}}&nbsp;more
         </div></span>
@@ -53,6 +54,7 @@
         <span class="static-info">Participants:</span>
         <span class="dynamic-info">&nbsp; {{trip.users[0]}}&nbsp;
                 <div style="display: inline; color: blue; text-decoration: underline; cursor: pointer;"
+                     (click)="onAllUsers()"
                      *ngIf="trip.users.length != 1">
                   +{{trip.users.length - 1}}&nbsp;more
                 </div></span>

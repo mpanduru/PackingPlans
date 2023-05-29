@@ -39,6 +39,8 @@ import {ConfirmationDialogComponent} from './components/confirmation-dialog-comp
 import { SpecificTripActivitiesComponent } from './components/specific-trip-activities/specific-trip-activities.component';
 import { LowerHomepageComponent } from './pages/lower-homepage/lower-homepage.component';
 import { AddUserToTripComponent } from './components/add-user-to-trip/add-user-to-trip.component';
+import { AllUsersComponent } from './components/all-users/all-users.component';
+import { NewActivityComponent } from './components/new-activity/new-activity.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { AddUserToTripComponent } from './components/add-user-to-trip/add-user-t
     ConfirmationDialogComponent,
     SpecificTripActivitiesComponent,
     LowerHomepageComponent,
-    AddUserToTripComponent
+    AddUserToTripComponent,
+    AllUsersComponent,
+    NewActivityComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 .activities-list {
   font-family: "Madera Regular";
-  height: 10vh;
-  margin-top: 4%;
+  height: 75%;
+  margin-top: 2%;
   list-style-type: none;
   font-size: large;
   font-weight: bold;
@@ -26,5 +26,17 @@
 }
 
 .mat-button:hover {
+  transform: scale(1.25) perspective(1px);
+}
+
+.new-activity-button {
+  float: right;
+  margin-top: 2%;
+  margin-right: 2%;
+  color: #222136;
+  cursor: pointer;
+}
+
+.new-activity-button:hover {
   transform: scale(1.25) perspective(1px);
 }

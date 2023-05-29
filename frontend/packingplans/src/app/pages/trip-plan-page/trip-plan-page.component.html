@@ -12,7 +12,7 @@
           <div class="select">
             <select [(ngModel)]="selectedDay" id="daySelect">
               <option *ngFor="let day of days" [value]="day">
-                {{ day.getDate() }}/{{ day.getMonth() }}/{{ day.getFullYear() }}</option>
+                {{ day.getDate() }}/{{ day.getMonth() + 1 }}/{{ day.getFullYear() }}</option>
             </select>
           </div>
         </div>
