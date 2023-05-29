@@ -31,4 +31,8 @@ export class ActivityService {
       tripId: tripId
     })
   }
+
+  deleteActivity(id: number): Observable<any> {
+    return this.http.delete(API_URL + id);
+  }
 }

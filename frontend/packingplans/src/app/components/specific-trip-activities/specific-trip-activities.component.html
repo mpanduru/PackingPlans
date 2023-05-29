@@ -1,3 +1,5 @@
+<h2 *ngIf="!activities.length" style="font-family: 'Madera W01 Bold'; text-align: center">There are no activities to
+  display!</h2>
 <ul class="activities-list">
   <li *ngFor="let activity of activities">
     <ng-container *ngIf="!activity.isEditMode; else editMode">
@@ -6,7 +8,7 @@
       <a class="mat-button" (click)="toggleIsEditable(activity)">
         <mat-icon>edit</mat-icon>
       </a>
-      <a class="mat-button">
+      <a class="mat-button" (click)="deleteActivity(activity)">
         <mat-icon>delete</mat-icon>
       </a>
       <br>
