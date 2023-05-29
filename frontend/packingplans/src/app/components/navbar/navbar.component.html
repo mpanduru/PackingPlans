@@ -15,7 +15,7 @@
       Log in
     </a>
     <span class="username" style="margin-right: 1%">{{username}}</span>
-    <a (click)="logout()" *ngIf="isLoggedIn" class="mat-button" mat-button>
+    <a (click)="logout()" *ngIf="isLoggedIn" class="mat-button" mat-button routerLink="/home">
       <mat-icon [ngStyle]="{'color':'white'}" class="icon-display">exit_to_app</mat-icon>
       Log out
     </a>
