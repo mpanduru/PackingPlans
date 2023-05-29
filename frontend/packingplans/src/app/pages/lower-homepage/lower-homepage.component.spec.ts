@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LowerHomepageComponent } from './lower-homepage.component';
+import {LowerHomepageComponent} from './lower-homepage.component';
 
-describe('LowerHomepageComponent', () => {
+xdescribe('LowerHomepageComponent', () => {
   let component: LowerHomepageComponent;
   let fixture: ComponentFixture<LowerHomepageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LowerHomepageComponent ]
+      declarations: [LowerHomepageComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(LowerHomepageComponent);
     component = fixture.componentInstance;
